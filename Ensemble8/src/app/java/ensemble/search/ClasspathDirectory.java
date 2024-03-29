@@ -35,11 +35,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.IOContext;
 import org.apache.lucene.store.IndexInput;
@@ -148,6 +145,12 @@ public class ClasspathDirectory extends Directory {
     }
 
     @Override public void close() throws IOException {}
+
+    @Override
+    public Set<String> getPendingDeletions() throws IOException {
+        return null;
+    }
+
     @Override public void deleteFile(String s) throws IOException { throw new UnsupportedOperationException("Not implemented"); }
     @Override public long fileLength(String s) throws IOException { throw new UnsupportedOperationException("Not implemented"); }
     @Override
