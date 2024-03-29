@@ -309,7 +309,7 @@ public class HomePage extends ListView<HomePage.HomePageRow> implements Callback
 
         @Override
         public String toString() {
-            return "HomePageRow{" + "rowType=" + rowType + ", title=" + title + ", samples=" + samples + '}';
+            return "HomePageRow{" + "rowType=" + rowType + ", title=" + title + ", samples=" + Arrays.toString(samples) + '}';
         }
     }
 

@@ -90,7 +90,7 @@ public class IndexSearcher {
             Query query = parser.parse(searchString);
             final TopGroupsCollector<BytesRef> collector = new TopGroupsCollector(
                     new TermGroupSelector("documentType"), searchGroups,
-                    Sort.RELEVANCE, Sort.RELEVANCE, 10, true, false, true);
+                    Sort.RELEVANCE, Sort.RELEVANCE, 10, true);
             searcher.search(query, collector);
             final TopGroups<BytesRef> groups = collector.getTopGroups(0);
             for (GroupDocs<BytesRef> groupDocs : groups.groups) {
