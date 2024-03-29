@@ -50,6 +50,7 @@ import javafx.collections.ObservableArray;
 import javafx.geometry.Point3D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -126,6 +127,10 @@ public class FXMLExporter {
             }
             if (PhongMaterial.class.isAssignableFrom(aClass)) {
                 res.add(new Property(aClass.getMethod("getDiffuseColor"), "diffuseColor"));
+                res.add(new Property(aClass.getMethod("getDiffuseMap"), "diffuseMap"));
+            }
+            if (Image.class.isAssignableFrom(aClass)) {
+                res.add(new Property(aClass.getMethod("getUrl"), "url"));
             }
             if (Node.class.isAssignableFrom(aClass)) {
                 res.add(new Property(aClass.getMethod("getId"), "id"));
