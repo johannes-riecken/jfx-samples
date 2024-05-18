@@ -40,23 +40,23 @@ import javafx.geometry.Point3D;
 public class MaxData {
     public static class MappingChannel {
         public int ntPoints;
-        public float tPoints[];
-        public int faces[]; // t0 t1 t2
+        public float[] tPoints;
+        public int[] faces; // t0 t1 t2
     }
 
     public static class Mesh {
         public String name;
         public int nPoints;
-        public float points[]; // x,y,z, x,y,z, ....
+        public float[] points; // x,y,z, x,y,z, ....
         public int nFaces;
-        public int faces[];    // [[p0,p1,p2, smoothing]...]
-        public MappingChannel mapping[];
+        public int[] faces;    // [[p0,p1,p2, smoothing]...]
+        public MappingChannel[] mapping;
     }
 
     public static class NodeTM {
         public String name;
         public Point3D pos;
-        public Point3D tm[] = new Point3D[3];
+        public Point3D[] tm = new Point3D[3];
     }
 
     public static class Material {
@@ -89,7 +89,7 @@ public class MaxData {
         public int materialRef;
     }
 
-    public Material materials[];
+    public Material[] materials;
     public Map<String, Node> nodes = new HashMap<>();
     public Map<String, Node> roots = new HashMap<>();
 }

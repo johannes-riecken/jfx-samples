@@ -61,7 +61,7 @@ public class MaxLoader extends Importer {
         } catch (NonInvertibleTransformException ex) {
             throw new RuntimeException(ex);
         }
-        float vts[] = new float[maxNode.mesh.nPoints * 3];
+        float[] vts = new float[maxNode.mesh.nPoints * 3];
         if (tmr != null) {
             for (int i = 0; i < maxNode.mesh.nPoints; i++) {
                 Point3D pt = tmr.transform(
@@ -87,14 +87,14 @@ public class MaxLoader extends Importer {
 
         MaxData.MappingChannel mapping = maxNode.mesh.mapping[0];
 
-        float uvs[] = new float[mapping.ntPoints * 2];
+        float[] uvs = new float[mapping.ntPoints * 2];
         for (int i = 0; i < mapping.ntPoints; i++) {
             uvs[i * 2] = mapping.tPoints[i * 2];
             uvs[i * 2 + 1] = 1.0f - mapping.tPoints[i * 2 + 1];
         }
 
-        int faces[] = new int[maxNode.mesh.nFaces * 6];
-        int sg[] = new int[maxNode.mesh.nFaces];
+        int[] faces = new int[maxNode.mesh.nFaces * 6];
+        int[] sg = new int[maxNode.mesh.nFaces];
         for (int i = 0; i < maxNode.mesh.nFaces; i++) {
             int[] f = maxNode.mesh.faces;
             int[] mf = mapping.faces;
@@ -144,7 +144,7 @@ public class MaxLoader extends Importer {
 
     public static String appendSuffix(String fileName, String suffix) {
         int dot = fileName.lastIndexOf('.');
-        String ext = fileName.substring(dot, fileName.length());
+        String ext = fileName.substring(dot);
         String name = fileName.substring(0, dot);
         String res = name + suffix + ext;
         return res;
@@ -175,7 +175,7 @@ public class MaxLoader extends Importer {
         return img;
     }
 
-    private void loadMaxMaterials(MaxData.Material mtls[], String dir) {
+    private void loadMaxMaterials(MaxData.Material[] mtls, String dir) {
         materials = new Material[mtls.length];
         for (int i = 0; i < mtls.length; i++) {
             MaxData.Material m = mtls[i];
@@ -186,7 +186,7 @@ public class MaxLoader extends Importer {
             String fullName = dir + File.separatorChar + m.diffuseMap;
             Image diffuseMap = loadImage(fullName);
             Image specularMap = loadImage(getSpecularTextureName(fullName));
-            Image bumpMap = loadImage(getBumpTextureName(fullName)); ;
+            Image bumpMap = loadImage(getBumpTextureName(fullName));
 
             mtl.setDiffuseMap(diffuseMap);
             mtl.setSpecularMap(specularMap);
@@ -196,7 +196,7 @@ public class MaxLoader extends Importer {
         }
     }
 
-    private void loadMaxMaterialsUrl(MaxData.Material mtls[], String baseURl) {
+    private void loadMaxMaterialsUrl(MaxData.Material[] mtls, String baseURl) {
         materials = new Material[mtls.length];
         for (int i = 0; i < mtls.length; i++) {
             MaxData.Material m = mtls[i];
@@ -207,7 +207,7 @@ public class MaxLoader extends Importer {
             String fullName = baseURl + m.diffuseMap;
             Image diffuseMap = new Image(fullName);
             Image specularMap = new Image(getSpecularTextureName(fullName));
-            Image bumpMap = new Image(getBumpTextureName(fullName)); ;
+            Image bumpMap = new Image(getBumpTextureName(fullName));
 
             mtl.setDiffuseMap(diffuseMap);
             mtl.setSpecularMap(specularMap);
@@ -248,8 +248,7 @@ public class MaxLoader extends Importer {
 
         Node node = null;
 
-        if (maxNode instanceof MaxData.GeomNode) {
-            MaxData.GeomNode geomNode = (MaxData.GeomNode) maxNode;
+        if (maxNode instanceof MaxData.GeomNode geomNode) {
             node = loadMaxMeshView(geomNode, maxData, null /* tm */);
         }
 

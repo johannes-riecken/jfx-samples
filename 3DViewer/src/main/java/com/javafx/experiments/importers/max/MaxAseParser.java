@@ -323,7 +323,7 @@ public class MaxAseParser {
             if (mesh.mapping == null) {
                 mesh.mapping = new MappingChannel[ch + 1];
             } else if (mesh.mapping.length <= ch) {
-                MappingChannel m[] = new MappingChannel[ch + 1];
+                MappingChannel[] m = new MappingChannel[ch + 1];
                 System.arraycopy(mesh.mapping, 0, m, 0, mesh.mapping.length);
                 mesh.mapping = m;
             }
@@ -335,38 +335,38 @@ public class MaxAseParser {
         }
 
         private static class MeshVertexList extends Callback {
-            final float data[];
+            final float[] data;
 
-            MeshVertexList(float data[]) { this.data = data; }
+            MeshVertexList(float[] data) { this.data = data; }
 
-            void value(byte args[][], int len[], int argc) {
+            void value(byte[][] args, int[] len, int argc) {
                 int idx = parseInt(args[1], len[1]) * 3;
-                data[idx + 0] = parseFloat(args[2], len[2]);
+                data[idx] = parseFloat(args[2], len[2]);
                 data[idx + 1] = parseFloat(args[3], len[3]);
                 data[idx + 2] = parseFloat(args[4], len[4]);
             }
         }
 
         private static class MeshTVertexList extends Callback {
-            final float data[];
+            final float[] data;
 
-            MeshTVertexList(float data[]) { this.data = data; }
+            MeshTVertexList(float[] data) { this.data = data; }
 
-            void value(byte args[][], int len[], int argc) {
+            void value(byte[][] args, int[] len, int argc) {
                 int idx = parseInt(args[1], len[1]) * 2;
-                data[idx + 0] = parseFloat(args[2], len[2]);
+                data[idx] = parseFloat(args[2], len[2]);
                 data[idx + 1] = parseFloat(args[3], len[3]);
             }
         }
 
         private static class MeshTFaceList extends Callback {
-            final int data[];
+            final int[] data;
 
-            MeshTFaceList(int data[]) { this.data = data; }
+            MeshTFaceList(int[] data) { this.data = data; }
 
-            void value(byte args[][], int len[], int argc) {
+            void value(byte[][] args, int[] len, int argc) {
                 int idx = parseInt(args[1], len[1]) * 3;
-                data[idx + 0] = parseInt(args[2], len[2]);
+                data[idx] = parseInt(args[2], len[2]);
                 data[idx + 1] = parseInt(args[3], len[3]);
                 data[idx + 2] = parseInt(args[4], len[4]);
             }
@@ -374,13 +374,13 @@ public class MaxAseParser {
 
         // *MESH_FACE 3045:    A: 2186 B: 2029 C: 1512 AB:    1 BC:    1 CA:    0  *MESH_SMOOTHING 1,25  *MESH_MTLID 1
         private static class MeshFaceList extends Callback {
-            final int data[]; // a,b,c, smoothing
+            final int[] data; // a,b,c, smoothing
 
-            MeshFaceList(int data[]) { this.data = data; }
+            MeshFaceList(int[] data) { this.data = data; }
 
-            void value(byte args[][], int len[], int argc) {
+            void value(byte[][] args, int[] len, int argc) {
                 int idx = parseInt(args[1], len[1]) * 4;
-                data[idx + 0] = parseInt(args[3], len[3]);
+                data[idx] = parseInt(args[3], len[3]);
                 data[idx + 1] = parseInt(args[5], len[5]);
                 data[idx + 2] = parseInt(args[7], len[7]);
                 // String smGr = new String(args[15], 0, len[15]);
@@ -388,7 +388,7 @@ public class MaxAseParser {
             }
         }
 
-        static private int parseSmGr(byte data[], int l) {
+        static private int parseSmGr(byte[] data, int l) {
             int result = 0, p = 0;
             while (true) {
                 int bit = 0;
