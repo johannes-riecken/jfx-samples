@@ -38,8 +38,10 @@ import javafx.geometry.Point3D;
 
 /** Max file format data objects */
 public class MaxData {
+    // MappingChannel contains the mapping of texture points to faces
     public static class MappingChannel {
         public int ntPoints;
+        // tPoints stands for texture points
         public float[] tPoints;
         public int[] faces; // t0 t1 t2
     }
@@ -53,6 +55,7 @@ public class MaxData {
         public MappingChannel[] mapping;
     }
 
+    // TM stands for transformation matrix
     public static class NodeTM {
         public String name;
         public Point3D pos;
