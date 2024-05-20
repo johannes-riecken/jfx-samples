@@ -39,6 +39,7 @@ fieldDef :: Parser FieldDef
 fieldDef = choice
     [ try simpleFieldDef
     , try arrayFieldDef
+    , try mapFieldDef
     ]
 
 simpleFieldDef :: Parser FieldDef
@@ -58,6 +59,15 @@ arrayFieldDef = do
     _ <- symbol ";"
     pure $ ArrayFieldDef tn fn
 
+mapFieldDef :: Parser FieldDef
+mapFieldDef = do
+    _ <- symbol "public" *> symbol "Map" *> symbol "<"
+    k <- typeName <* symbol ","
+    v <- typeName <* symbol ">"
+    fn <- fieldName
+    _ <- symbol "=" *> symbol "new" *> symbol "HashMap<>()" *> symbol ";"
+    pure $ MapFieldDef k v fn
+
 className :: Parser ClassName
 className = lexeme $ (:) <$> upperChar <*> many alphaNumChar
 
@@ -65,7 +75,7 @@ typeName :: Parser TypeName
 typeName = lexeme $ some alphaNumChar
 
 fieldName :: Parser FieldName
-fieldName = (:) <$> lowerChar <*> many alphaNumChar
+fieldName = lexeme $ (:) <$> lowerChar <*> many alphaNumChar
 
 parseClassDef :: String -> Either String ClassDef
 parseClassDef input = case parse (classDef <* eof) "" input of

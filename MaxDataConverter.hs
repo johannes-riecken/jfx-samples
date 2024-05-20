@@ -19,8 +19,14 @@ instance ToHaskell ClassDef where
     toHaskell _ (SimpleClassDef cn fds) = "data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }"
 
 instance ToHaskell FieldDef where
-    toHaskell cn (SimpleFieldDef tn fn) = addPrefix cn fn <> " :: " <> ucfirst tn
-    toHaskell cn (ArrayFieldDef tn fn) = addPrefix cn fn <> " :: " <> "[" <> ucfirst tn <> "]"
+    toHaskell cn (SimpleFieldDef tn fn) = addPrefix cn fn <> " :: " <> typeNameToHaskell tn
+    toHaskell cn (ArrayFieldDef tn fn) = addPrefix cn fn <> " :: " <> "[" <> typeNameToHaskell tn <> "]"
+    toHaskell cn (MapFieldDef k v fn) = addPrefix cn fn <> " :: " <> "Map " <> typeNameToHaskell k <> " " <> typeNameToHaskell v
+
+typeNameToHaskell :: TypeName -> String
+typeNameToHaskell "Integer" = "Int"
+typeNameToHaskell xs = ucfirst xs
+
 
 addPrefix :: ClassName -> FieldName -> String
 addPrefix cn fn = let guess = filter isUpper cn

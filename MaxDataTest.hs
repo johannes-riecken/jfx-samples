@@ -13,3 +13,6 @@ main = hspec $ do
     it "handles short class names by taking the first three letters" $ do
         let got = translate "public class Mesh { public String name; }"
         got `shouldBe` Right "data Mesh = Mesh { mesName :: String }"
+    it "translates HashMap to Map" $ do
+        let got = translate "public class InB { public Map<String, Integer> nodes = new HashMap<>(); }"
+        got `shouldBe` Right "data InB = InB { ibNodes :: Map String Int }"
