@@ -14,11 +14,11 @@ data Material = Material { matName :: String, matDiffuseMap :: String, mapAmbien
 
 data Node = Node { nodName :: String, nodeNodeTM :: NodeTM, nodParent :: Node, nodChildren :: [Node] }
 
-data LightNode = LightNode { lnIntensity :: Float, lnR :: Float, lnG :: Float, lnB :: Float, {- inherited -} lnNode :: Node }
+data LightNode = LightNode { lnIntensity :: Float, lnR :: Float, lnG :: Float, lnB :: Float, lnBaseNode :: Node }
 
-data CameraNode = CameraNode { cnTarget :: NodeTM, cnNear :: Float, cnFar :: Float, cnFov :: Float, {- inherited -} cnNode :: Node }
+data CameraNode = CameraNode { cnTarget :: NodeTM, cnNear :: Float, cnFar :: Float, cnFov :: Float, cnBaseNode :: Node }
 
-data GeomNode = GeomNode { gnMesh :: Mesh, gnMaterialRef :: Int, {- inherited -} gnNode :: Node }
+data GeomNode = GeomNode { gnMesh :: Mesh, gnMaterialRef :: Int, gnBaseNode :: Node }
 
 main :: IO ()
 main = pure ()
