@@ -10,3 +10,6 @@ main = hspec $ do
     it "handles arrays" $ do
         let got = translate "public class InA { public int[] numbers; }"
         got `shouldBe` Right "data InA = InA { iaNumbers :: [Int] }"
+    it "handles short class names by taking the first three letters" $ do
+        let got = translate "public class Mesh { public String name; }"
+        got `shouldBe` Right "data Mesh = Mesh { mesName :: String }"

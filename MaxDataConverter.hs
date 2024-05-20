@@ -23,8 +23,10 @@ instance ToHaskell FieldDef where
     toHaskell cn (ArrayFieldDef tn fn) = addPrefix cn fn <> " :: " <> "[" <> ucfirst tn <> "]"
 
 addPrefix :: ClassName -> FieldName -> String
-addPrefix cn fn = (fmap toLower . filter isUpper $ cn) <> ucfirst fn
-
+addPrefix cn fn = let guess = filter isUpper cn
+    in fmap toLower (if length guess > 1
+    then guess
+    else fmap toLower . take 3 $ cn) <> ucfirst fn
 ucfirst :: String -> String
 ucfirst [] = []
 ucfirst (x:xs) = toUpper x : xs
