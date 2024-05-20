@@ -20,6 +20,7 @@ instance ToHaskell ClassDef where
 
 instance ToHaskell FieldDef where
     toHaskell cn (SimpleFieldDef tn fn) = addPrefix cn fn <> " :: " <> ucfirst tn
+    toHaskell cn (ArrayFieldDef tn fn) = addPrefix cn fn <> " :: " <> "[" <> ucfirst tn <> "]"
 
 addPrefix :: ClassName -> FieldName -> String
 addPrefix cn fn = (fmap toLower . filter isUpper $ cn) <> ucfirst fn

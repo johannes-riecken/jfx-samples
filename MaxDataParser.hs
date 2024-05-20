@@ -38,6 +38,7 @@ simpleClassDef = do
 fieldDef :: Parser FieldDef
 fieldDef = choice
     [ try simpleFieldDef
+    , try arrayFieldDef
     ]
 
 simpleFieldDef :: Parser FieldDef
@@ -47,6 +48,15 @@ simpleFieldDef = do
     fn <- fieldName
     _ <- symbol ";"
     pure $ SimpleFieldDef tn fn
+
+arrayFieldDef :: Parser FieldDef
+arrayFieldDef = do
+    _ <- symbol "public"
+    tn <- typeName
+    _ <- symbol "[]"
+    fn <- fieldName
+    _ <- symbol ";"
+    pure $ ArrayFieldDef tn fn
 
 className :: Parser ClassName
 className = lexeme $ (:) <$> upperChar <*> many alphaNumChar

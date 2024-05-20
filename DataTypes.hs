@@ -6,6 +6,7 @@ data ClassDef = SimpleClassDef ClassName [FieldDef]
 
 -- gets parsed
 data FieldDef = SimpleFieldDef TypeName FieldName
+    | ArrayFieldDef TypeName FieldName
     deriving (Eq, Ord, Show, Read)
 
 type ClassName = String
