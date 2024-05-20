@@ -22,6 +22,7 @@ instance ToHaskell FieldDef where
     toHaskell cn (SimpleFieldDef tn fn) = addPrefix cn fn <> " :: " <> typeNameToHaskell tn
     toHaskell cn (ArrayFieldDef tn fn) = addPrefix cn fn <> " :: " <> "[" <> typeNameToHaskell tn <> "]"
     toHaskell cn (MapFieldDef k v fn) = addPrefix cn fn <> " :: " <> "Map " <> typeNameToHaskell k <> " " <> typeNameToHaskell v
+    toHaskell cn (ListFieldDef tn fn) = addPrefix cn fn <> " :: " <> "[" <> typeNameToHaskell tn <> "]"
 
 typeNameToHaskell :: TypeName -> String
 typeNameToHaskell "Integer" = "Int"

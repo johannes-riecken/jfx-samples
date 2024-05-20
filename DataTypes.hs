@@ -8,6 +8,7 @@ data ClassDef = SimpleClassDef ClassName [FieldDef]
 data FieldDef = SimpleFieldDef TypeName FieldName
     | ArrayFieldDef TypeName FieldName
     | MapFieldDef TypeName TypeName FieldName
+    | ListFieldDef TypeName FieldName
     deriving (Eq, Ord, Show, Read)
 
 type ClassName = String

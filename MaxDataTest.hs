@@ -16,3 +16,6 @@ main = hspec $ do
     it "translates HashMap to Map" $ do
         let got = translate "public class InB { public Map<String, Integer> nodes = new HashMap<>(); }"
         got `shouldBe` Right "data InB = InB { ibNodes :: Map String Int }"
+    it "translates List to []" $ do
+        let got = translate "public class InC { public List<Integer> numbers; }"
+        got `shouldBe` Right "data InC = InC { icNumbers :: [Int] }"

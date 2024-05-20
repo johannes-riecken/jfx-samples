@@ -40,6 +40,7 @@ fieldDef = choice
     [ try simpleFieldDef
     , try arrayFieldDef
     , try mapFieldDef
+    , try listFieldDef
     ]
 
 simpleFieldDef :: Parser FieldDef
@@ -67,6 +68,13 @@ mapFieldDef = do
     fn <- fieldName
     _ <- symbol "=" *> symbol "new" *> symbol "HashMap<>()" *> symbol ";"
     pure $ MapFieldDef k v fn
+
+listFieldDef :: Parser FieldDef
+listFieldDef = do
+    _ <- symbol "public" *> symbol "List" *> symbol "<"
+    tn <- typeName <* symbol ">"
+    fn <- fieldName <* symbol ";"
+    pure $ ListFieldDef tn fn
 
 className :: Parser ClassName
 className = lexeme $ (:) <$> upperChar <*> many alphaNumChar
