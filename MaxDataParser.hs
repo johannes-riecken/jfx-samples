@@ -32,8 +32,8 @@ simpleClassDef :: Parser ClassDef
 simpleClassDef = do
     _ <- symbol "public" *> optional (symbol "static") *> symbol "class"
     cn <- className
-    fds <- braces $ many fieldDef
-    pure $ SimpleClassDef cn fds
+    (cds, fds) <- braces $ (,) <$> many classDef <*> many fieldDef
+    pure $ SimpleClassDef cn cds fds
 
 fieldDef :: Parser FieldDef
 fieldDef = choice

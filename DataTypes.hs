@@ -1,7 +1,7 @@
 module DataTypes where
 
 -- gets parsed
-data ClassDef = SimpleClassDef ClassName [FieldDef]
+data ClassDef = SimpleClassDef ClassName [ClassDef] [FieldDef]
     deriving (Eq, Ord, Show, Read)
 
 -- gets parsed
