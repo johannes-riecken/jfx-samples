@@ -17,8 +17,8 @@ class ToHaskell a where
 
 instance ToHaskell ClassDef where
     toHaskell _ (SimpleClassDef cn Nothing [] fds) = "data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }"
-    toHaskell f (SimpleClassDef cn Nothing cds fds) = intercalate "\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }") : fmap (toHaskell f) cds
-    toHaskell f (SimpleClassDef cn (Just super) cds fds) = intercalate "\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) (fds <> [SimpleFieldDef super ("base" <> super)])) <> " }") : fmap (toHaskell f) cds
+    toHaskell f (SimpleClassDef cn Nothing cds fds) = intercalate "\n\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }") : fmap (toHaskell f) cds
+    toHaskell f (SimpleClassDef cn (Just super) cds fds) = intercalate "\n\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) (fds <> [SimpleFieldDef super ("base" <> super)])) <> " }") : fmap (toHaskell f) cds
 
 
 instance ToHaskell FieldDef where
