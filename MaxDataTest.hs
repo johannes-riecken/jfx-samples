@@ -22,6 +22,6 @@ main = hspec $ do
     it "translates static classes by individual translation" $ do
         let got = translate "public class InD { public static class Inner { public int foo; } public int bar; }"
         got `shouldBe` Right "data InD = InD { idBar :: Int }\ndata Inner = Inner { innFoo :: Int }"
-    -- it "translates inheritance to composition" $ do
-    --     let got = translate "public class InE { public static class Foo { public int bar; } public static class Baz extends Foo { public int quux; } public int foobar; }"
-    --     got `shouldBe` Right "data InE = InE { ieFoobar :: Int }\ndata Foo = Foo { fooBar :: Int }\ndata Baz = Baz { bazQuux :: Int, bazBaseFoo :: Foo }"
+    it "translates inheritance to composition" $ do
+        let got = translate "public class InE { public static class Foo { public int bar; } public static class Baz extends Foo { public int quux; } public int foobar; }"
+        got `shouldBe` Right "data InE = InE { ieFoobar :: Int }\ndata Foo = Foo { fooBar :: Int }\ndata Baz = Baz { bazQuux :: Int, bazBaseFoo :: Foo }"

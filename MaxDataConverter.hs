@@ -16,8 +16,10 @@ class ToHaskell a where
     toHaskell :: ClassName -> a -> String
 
 instance ToHaskell ClassDef where
-    toHaskell _ (SimpleClassDef cn [] fds) = "data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }"
-    toHaskell f (SimpleClassDef cn cds fds) = intercalate "\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }") : fmap (toHaskell f) cds
+    toHaskell _ (SimpleClassDef cn Nothing [] fds) = "data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }"
+    toHaskell f (SimpleClassDef cn Nothing cds fds) = intercalate "\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) fds) <> " }") : fmap (toHaskell f) cds
+    toHaskell f (SimpleClassDef cn (Just super) cds fds) = intercalate "\n" $ ("data " <> cn <> " = " <> cn <> " { " <> intercalate ", " (fmap (toHaskell cn) (fds <> [SimpleFieldDef super ("base" <> super)])) <> " }") : fmap (toHaskell f) cds
+
 
 instance ToHaskell FieldDef where
     toHaskell cn (SimpleFieldDef tn fn) = addPrefix cn fn <> " :: " <> typeNameToHaskell tn
