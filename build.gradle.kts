@@ -1,20 +1,5 @@
 plugins {
-    id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-}
-
-application {
-    mainModule = 'com.javafx.experiments.jfx3dviewer'
-    mainClass = 'com.javafx.experiments.jfx3dviewer.Jfx3dViewerApp'
-}
-
-compileJava {
-    options.compilerArgs += '-Xlint:deprecation'
-}
-
-javafx {
-    version = '22-ea+11'
-    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
+    `java-library`
 }
 
 repositories {
@@ -34,8 +19,8 @@ dependencies {
     implementation(libs.org.openjfx.javafx.web)
     implementation(libs.org.apache.lucene.lucene.queryparser)
     implementation(libs.org.apache.lucene.lucene.grouping)
-//    testImplementation(libs.org.junit.jupiter.junit.jupiter)
-//    testImplementation(libs.junit.junit)
+    testImplementation(libs.org.junit.jupiter.junit.jupiter)
+    testImplementation(libs.junit.junit)
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_22
+java.sourceCompatibility = JavaVersion.VERSION_18
