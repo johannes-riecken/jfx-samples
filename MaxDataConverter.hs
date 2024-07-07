@@ -40,3 +40,10 @@ addPrefix cn fn = let guess = filter isUpper cn
 ucfirst :: String -> String
 ucfirst [] = []
 ucfirst (x:xs) = toUpper x : xs
+
+main :: IO ()
+main = do
+    xs <- getContents
+    case translate xs of
+        Left err -> putStrLn err
+        Right res -> putStrLn res
