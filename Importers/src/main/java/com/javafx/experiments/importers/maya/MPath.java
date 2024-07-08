@@ -120,10 +120,9 @@ public class MPath implements Comparable {
         }
 
         public boolean equals(Object arg) {
-            if (!(arg instanceof Slice)) {
+            if (!(arg instanceof Slice other)) {
                 return false;
             }
-            Slice other = (Slice) arg;
             return (start == other.start &&
                     end == other.end);
         }
@@ -133,8 +132,7 @@ public class MPath implements Comparable {
         }
 
         public int compareTo(Object arg) {
-            if (arg instanceof Slice) {
-                Slice other = (Slice) arg;
+            if (arg instanceof Slice other) {
                 int diff = start - other.start;
                 if (diff != 0) {
                     return diff;
@@ -174,10 +172,9 @@ public class MPath implements Comparable {
         }
 
         public boolean equals(Object arg) {
-            if (!(arg instanceof Select)) {
+            if (!(arg instanceof Select other)) {
                 return false;
             }
-            Select other = (Select) arg;
             return (name.equals(other.name));
         }
 
@@ -263,10 +260,9 @@ public class MPath implements Comparable {
     }
 
     public boolean equals(Object arg) {
-        if (!(arg instanceof MPath)) {
+        if (!(arg instanceof MPath other)) {
             return false;
         }
-        MPath other = (MPath) arg;
         return (node == other.node &&
                 components.equals(other.components));
     }

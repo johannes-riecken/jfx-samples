@@ -52,11 +52,11 @@ import com.javafx.experiments.importers.maya.values.MPointer;
 
 public class MParser {
 
-    private MEnv env;
+    private final MEnv env;
     private URL inputSource;
     private MNode selectedNode;
     private boolean inPlaybackScriptNode = false;
-    private Set<String> refs = new HashSet<>();
+    private final Set<String> refs = new HashSet<>();
 
     public MParser(MEnv env) {
         this.env = env;
@@ -109,7 +109,7 @@ public class MParser {
     // Maya-specific tokenizer; handles quoted strings with spaces and strips quotes from them
     // Does not properly unescape contents of strings yet
     class Tokenizer {
-        private String line;
+        private final String line;
         private int pos;
         private boolean escaping = false;
 

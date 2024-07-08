@@ -63,7 +63,7 @@ public class SimpleViewerApp extends Application {
     private final Rotate cameraLookXRotate = new Rotate(0,0,0,0,Rotate.X_AXIS);
     private final Rotate cameraLookZRotate = new Rotate(0,0,0,0,Rotate.Z_AXIS);
     private final Translate cameraPosition = new Translate(0,0,-7);
-    private AutoScalingGroup autoScalingGroup = new AutoScalingGroup(2);
+    private final AutoScalingGroup autoScalingGroup = new AutoScalingGroup(2);
 
     @Override public void start(Stage stage) throws Exception {
         List<String> args = getParameters().getRaw();

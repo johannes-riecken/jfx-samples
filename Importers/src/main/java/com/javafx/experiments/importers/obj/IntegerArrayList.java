@@ -351,7 +351,7 @@ public class IntegerArrayList extends AbstractList<Integer>
     // Positional Access Operations
 
     @SuppressWarnings("unchecked") Integer elementData(int index) {
-        return (Integer) elementData[index];
+        return elementData[index];
     }
 
     /**
@@ -738,7 +738,7 @@ public class IntegerArrayList extends AbstractList<Integer>
             if (i >= elementData.length)
                 throw new ConcurrentModificationException();
             cursor = i + 1;
-            return (Integer) elementData[lastRet = i];
+            return elementData[lastRet = i];
         }
 
         @Override public void remove() {
@@ -791,7 +791,7 @@ public class IntegerArrayList extends AbstractList<Integer>
             if (i >= elementData.length)
                 throw new ConcurrentModificationException();
             cursor = i;
-            return (Integer) elementData[lastRet = i];
+            return elementData[lastRet = i];
         }
 
         @Override public void set(Integer e) {
@@ -973,7 +973,7 @@ public class IntegerArrayList extends AbstractList<Integer>
                     if (offset + i >= elementData.length)
                         throw new ConcurrentModificationException();
                     cursor = i + 1;
-                    return (Integer) elementData[offset + (lastRet = i)];
+                    return elementData[offset + (lastRet = i)];
                 }
 
                 @Override public boolean hasPrevious() {
@@ -990,7 +990,7 @@ public class IntegerArrayList extends AbstractList<Integer>
                     if (offset + i >= elementData.length)
                         throw new ConcurrentModificationException();
                     cursor = i;
-                    return (Integer) elementData[offset + (lastRet = i)];
+                    return elementData[offset + (lastRet = i)];
                 }
 
                 @Override public int nextIndex() {
@@ -1042,7 +1042,7 @@ public class IntegerArrayList extends AbstractList<Integer>
                     }
                 }
 
-                final void checkForComodification() {
+                void checkForComodification() {
                     if (expectedModCount != IntegerArrayList.this.modCount)
                         throw new ConcurrentModificationException();
                 }

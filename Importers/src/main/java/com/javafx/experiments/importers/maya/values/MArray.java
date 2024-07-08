@@ -36,10 +36,10 @@ import java.util.List;
 
 public interface MArray extends MData {
     /** Set one element of this array. */
-    public void set(int index, MData data);
+    void set(int index, MData data);
 
     /** Get all of the data in this array. */
-    public List<MData> get();
+    List<MData> get();
 
-    public int getSize();
+    int getSize();
 }

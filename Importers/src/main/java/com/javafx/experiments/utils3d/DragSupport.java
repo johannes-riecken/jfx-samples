@@ -52,7 +52,7 @@ public class DragSupport {
     private Number anchor;
     private double dragAnchor;
     private MouseEvent lastMouseEvent;
-    private Scene target;
+    private final Scene target;
 
     /**
      * Creates DragSupport instance that attaches EventHandlers to the given scene
@@ -156,14 +156,11 @@ public class DragSupport {
     }
 
     private double getCoord(MouseEvent t, Orientation orientation) {
-        switch (orientation) {
-            case HORIZONTAL:
-                return t.getScreenX();
-            case VERTICAL:
-                return t.getScreenY();
-            default:
-                throw new IllegalArgumentException("This orientation is not supported: " + orientation);
-        }
+        return switch (orientation) {
+            case HORIZONTAL -> t.getScreenX();
+            case VERTICAL -> t.getScreenY();
+            default -> throw new IllegalArgumentException("This orientation is not supported: " + orientation);
+        };
     }
 
 }

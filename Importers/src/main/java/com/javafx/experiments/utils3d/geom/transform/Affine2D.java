@@ -1509,8 +1509,7 @@ public class Affine2D extends AffineBase {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof BaseTransform) {
-            BaseTransform a = (BaseTransform) obj;
+        if (obj instanceof BaseTransform a) {
             return (a.getType() <= TYPE_AFFINE2D_MASK &&
                     a.getMxx() == this.mxx &&
                     a.getMxy() == this.mxy &&

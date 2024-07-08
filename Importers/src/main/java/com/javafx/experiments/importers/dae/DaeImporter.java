@@ -60,11 +60,11 @@ import java.util.*;
  */
 @SuppressWarnings("UnusedDeclaration")
 public class DaeImporter extends Importer {
-    private Group rootNode = new Group();
+    private final Group rootNode = new Group();
     private Camera firstCamera = null;
     private double firstCameraAspectRatio = 4/3;
-    private Map<String,Camera> cameras = new HashMap<>();
-    private Map<String,Object> meshes = new HashMap<>();
+    private final Map<String,Camera> cameras = new HashMap<>();
+    private final Map<String,Object> meshes = new HashMap<>();
     private  boolean createPolyMesh;
 
     {
@@ -135,7 +135,7 @@ public class DaeImporter extends Importer {
     public boolean isSupported(String extension) {
         return extension != null && extension.equals("dae");
     }
-    private static enum State {
+    private enum State {
         UNKNOWN,camera,visual_scene,node,aspect_ratio,xfov,yfov,znear,zfar,instance_camera,instance_geometry,
         translate,rotate,scale,matrix,float_array,polygons,input,p,vertices,authoring_tool,polylist,vcount}
 
@@ -150,13 +150,13 @@ public class DaeImporter extends Importer {
     private class DaeSaxParser extends DefaultHandler {
         private State state = State.UNKNOWN;
         private String authoringTool;
-        private LinkedList<DaeNode> nodes = new LinkedList<>();
+        private final LinkedList<DaeNode> nodes = new LinkedList<>();
         private StringBuilder charBuf;
-        private Map<String,String> currentId = new HashMap<>();
-        private Map<String,float[]> floatArrays = new HashMap<>();
-        private Map<String,Input> inputs = new HashMap<>();
+        private final Map<String,String> currentId = new HashMap<>();
+        private final Map<String,float[]> floatArrays = new HashMap<>();
+        private final Map<String,Input> inputs = new HashMap<>();
         private int[] vCounts;
-        private List<int[]> pLists = new ArrayList<>();
+        private final List<int[]> pLists = new ArrayList<>();
         private List<Transform> currentTransforms;
         private Double xfov,yfov,znear,zfar,aspect_ratio;
 

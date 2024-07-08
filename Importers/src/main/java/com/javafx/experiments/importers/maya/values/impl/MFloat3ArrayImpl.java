@@ -42,7 +42,7 @@ public class MFloat3ArrayImpl extends MDataImpl implements MFloat3Array {
     private float[] data;
 
     static class Parser {
-        private MFloat3Array array;
+        private final MFloat3Array array;
 
         Parser(MFloat3Array array) {
             this.array = array;
@@ -61,15 +61,15 @@ public class MFloat3ArrayImpl extends MDataImpl implements MFloat3Array {
     }
 
     static class MFloat3ArraySlice extends MDataImpl implements MFloat3Array {
-        private MFloat3Array array;
-        private int base;
-        private int length;
+        private final MFloat3Array array;
+        private final int base;
+        private final int length;
 
         MFloat3ArraySlice(
                 MFloat3Array array,
                 int base,
                 int length) {
-            super((MFloat3ArrayType) array.getType());
+            super(array.getType());
             this.array = array;
             this.base = base;
             this.length = length;
@@ -115,7 +115,7 @@ public class MFloat3ArrayImpl extends MDataImpl implements MFloat3Array {
     }
 
     public void set(int index, float x, float y, float z) {
-        data[3 * index + 0] = x;
+        data[3 * index] = x;
         data[3 * index + 1] = y;
         data[3 * index + 2] = z;
     }

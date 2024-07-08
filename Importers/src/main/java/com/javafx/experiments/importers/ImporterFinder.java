@@ -65,7 +65,7 @@ public class ImporterFinder {
                     }
                 }
             }
-            URLClassLoader cl = new URLClassLoader((URL[]) urlList.toArray(new URL[0]), this.getClass().getClassLoader());
+            URLClassLoader cl = new URLClassLoader(urlList.toArray(new URL[0]), this.getClass().getClassLoader());
             return cl;
         } else {
             throw new RuntimeException("Could not import library. Failed to determine importer library location ");

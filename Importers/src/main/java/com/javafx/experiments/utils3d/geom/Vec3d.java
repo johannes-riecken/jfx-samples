@@ -236,8 +236,7 @@ public class Vec3d {
         if (obj == this) {
             return true;
         }
-        if (obj instanceof Vec3d) {
-            Vec3d v = (Vec3d) obj;
+        if (obj instanceof Vec3d v) {
             return (x == v.x) && (y == v.y) && (z == v.z);
         }
         return false;

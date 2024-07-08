@@ -33,13 +33,13 @@
 package com.javafx.experiments.importers.maya.values;
 
 public interface MCharacterMapping extends MData {
-    public interface Entry {
-        public String getKey();
+    interface Entry {
+        String getKey();
 
-        public int getSourceIndex();
+        int getSourceIndex();
 
-        public int getTargetIndex();
+        int getTargetIndex();
     }
 
-    public Entry[] getMapping();
+    Entry[] getMapping();
 }

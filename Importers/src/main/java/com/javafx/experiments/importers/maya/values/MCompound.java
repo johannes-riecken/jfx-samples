@@ -35,13 +35,13 @@ package com.javafx.experiments.importers.maya.values;
 import com.javafx.experiments.importers.maya.types.MCompoundType;
 
 public interface MCompound extends MData {
-    public MCompoundType getCompoundType();
+    MCompoundType getCompoundType();
 
-    public MData getFieldData(int fieldIndex);
+    MData getFieldData(int fieldIndex);
 
-    public MData getFieldData(String fieldName);
+    MData getFieldData(String fieldName);
 
-    public void set(int fieldIndex, MData value);
+    void set(int fieldIndex, MData value);
 
-    public void set(String fieldName, MData data);
+    void set(String fieldName, MData data);
 }

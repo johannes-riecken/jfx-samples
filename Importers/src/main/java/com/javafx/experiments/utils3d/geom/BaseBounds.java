@@ -50,7 +50,7 @@ public abstract class BaseBounds {
      * other than with a bounding box. Such bounds can sometimes more
      * accurately represent the pixels
      */
-    public static enum BoundsType {
+    public enum BoundsType {
         RECTANGLE, // A 2D axis-aligned bounding rectangle
         BOX,  // A 3D axis-aligned bounding box
     }

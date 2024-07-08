@@ -152,7 +152,7 @@ public class PolygonMeshView extends Parent {
      *
      * @defaultValue null
      */
-    private ObjectProperty<Material> materialProperty = new SimpleObjectProperty<Material>();
+    private final ObjectProperty<Material> materialProperty = new SimpleObjectProperty<Material>();
     public Material getMaterial() { return materialProperty.get(); }
     public void setMaterial(Material material) { materialProperty.set(material); }
     public ObjectProperty<Material> materialProperty() { return materialProperty; }

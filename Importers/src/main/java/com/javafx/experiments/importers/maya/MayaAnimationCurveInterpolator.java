@@ -100,7 +100,7 @@ class MayaAnimationCurveInterpolator extends Interpolator {
     // [!] API Change
     public int interpolate2(int startValue, int endValue, double fraction) {
         return (int) interpolate(
-                (double) startValue,
+                startValue,
                 (double) endValue,
                 fraction);
     }

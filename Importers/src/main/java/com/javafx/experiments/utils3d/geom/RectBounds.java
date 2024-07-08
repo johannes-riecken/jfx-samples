@@ -281,7 +281,7 @@ public final class RectBounds extends BaseBounds {
      * Set the bounds to match that of the RectBounds object specified. The
      * specified bounds object must not be null.
      */
-    public final void setBounds(RectBounds other) {
+    public void setBounds(RectBounds other) {
         minX = other.getMinX();
         minY = other.getMinY();
         maxX = other.getMaxX();
@@ -291,7 +291,7 @@ public final class RectBounds extends BaseBounds {
     /**
      * Set the bounds to the given values.
      */
-    public final void setBounds(float minX, float minY, float maxX, float maxY) {
+    public void setBounds(float minX, float minY, float maxX, float maxY) {
         this.minX = minX;
         this.minY = minY;
         this.maxX = maxX;
@@ -578,8 +578,7 @@ public final class RectBounds extends BaseBounds {
         if (minX != other.getMinX()) return false;
         if (minY != other.getMinY()) return false;
         if (maxX != other.getMaxX()) return false;
-        if (maxY != other.getMaxY()) return false;
-        return true;
+        return maxY == other.getMaxY();
     }
 
     @Override

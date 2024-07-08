@@ -36,6 +36,6 @@ import com.javafx.experiments.utils3d.geom.Vec3d;
 
 public interface CanTransformVec3d {
 
-    public Vec3d transform(Vec3d point, Vec3d pointOut);
+    Vec3d transform(Vec3d point, Vec3d pointOut);
 
 }

@@ -52,7 +52,7 @@ import static com.javafx.experiments.importers.obj.ObjImporter.*;
 /** Reader for OBJ file MTL material files. */
 public class MtlReader {
 
-    private String baseUrl;
+    private final String baseUrl;
 
     public MtlReader(String filename, String parentUrl) {
         baseUrl = parentUrl.substring(0,parentUrl.lastIndexOf('/')+1);
@@ -68,7 +68,7 @@ public class MtlReader {
         }
     }
 
-    private Map<String, Material> materials = new HashMap<>();
+    private final Map<String, Material> materials = new HashMap<>();
     private PhongMaterial material = new PhongMaterial();
     private boolean modified = false;
 

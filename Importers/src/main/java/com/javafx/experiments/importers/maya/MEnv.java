@@ -479,9 +479,9 @@ public class MEnv {
     }
 
 
-    private Set<MNode> nodes = new LinkedHashSet();
-    private Map<String, MNodeType> nodeTypes = new HashMap();
-    private Map<String, MDataType> dataTypes = new HashMap();
+    private final Set<MNode> nodes = new LinkedHashSet();
+    private final Map<String, MNodeType> nodeTypes = new HashMap();
+    private final Map<String, MDataType> dataTypes = new HashMap();
 
     public Collection<MNode> getNodes() {
         return nodes;
@@ -561,12 +561,9 @@ public class MEnv {
 
     public MNodeType findNodeType(String name) {
         MNodeType ret =  nodeTypes.get(name);
-        if (ret == null) {
-            //System.out.println("nodeTypes =" + nodeTypes);
-            //throw new Error("Node Type Not Found: "+ name);
-//            System.out.println("node type not found: " +name);
-            return null;
-        }
+        //System.out.println("nodeTypes =" + nodeTypes);
+        //throw new Error("Node Type Not Found: "+ name);
+        //            System.out.println("node type not found: " +name);
         return ret;
     }
 
@@ -953,7 +950,7 @@ public class MEnv {
             super(env, "geometryFilter");
             addSuperType(env.findNodeType("dependNode"));
             addAttribute(new MAttribute(env, "outputGeometry", "og",
-                                        new MArrayType(env, env.findDataType("Message"))));;
+                                        new MArrayType(env, env.findDataType("Message"))));
             addAttribute(new MAttribute(env, "input", "ip",
                                         new MArrayType(env, new MCompoundType(env,
                                                                               "geometryFilter.ip") {
@@ -2209,7 +2206,7 @@ Less or Equal */
                                                          env.findDataType("time"),
                                                          null);
                                             }
-                                        }));;
+                                        }));
 
             addAttribute(new MAttribute(env, "inputForce", "ifr",
                                         env.findDataType("float3[]")));

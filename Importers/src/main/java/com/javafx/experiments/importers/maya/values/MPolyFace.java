@@ -35,7 +35,7 @@ package com.javafx.experiments.importers.maya.values;
 import java.util.List;
 
 public interface MPolyFace extends MData {
-    public static class FaceData {
+    class FaceData {
         private int[] faceEdges;
         private int[] holeEdges;
         private int[][] uvData;
@@ -107,7 +107,7 @@ public interface MPolyFace extends MData {
         }
     }
 
-    public void addFace(FaceData face);
+    void addFace(FaceData face);
 
-    public List<FaceData> getFaces();
+    List<FaceData> getFaces();
 }

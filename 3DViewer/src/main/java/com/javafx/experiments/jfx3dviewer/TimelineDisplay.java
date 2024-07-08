@@ -43,7 +43,7 @@ import javafx.scene.text.Text;
  * Visual display for timeline play head and length
  */
 public class TimelineDisplay extends Region {
-    private SimpleDoubleProperty currentTimeAsPercentage = new SimpleDoubleProperty(0) {
+    private final SimpleDoubleProperty currentTimeAsPercentage = new SimpleDoubleProperty(0) {
         @Override protected void invalidated() {
             requestLayout();
         }

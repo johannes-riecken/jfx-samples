@@ -33,7 +33,7 @@
 package com.javafx.experiments.importers.maya.values;
 
 public interface MBool extends MData {
-    public void set(boolean value);
+    void set(boolean value);
 
-    public boolean get();
+    boolean get();
 }

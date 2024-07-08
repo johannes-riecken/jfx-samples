@@ -35,7 +35,7 @@ package com.javafx.experiments.importers.maya.values;
 import java.util.List;
 
 public interface MComponentList extends MData {
-    public static class Component {
+    class Component {
         // Ideally we would have an enum of these, but we don't know all of the mappings yet.
         // The possible values are listed in MFn::Type (MFn.h), but not the names.
         // Here are some, derived by using the Maya selection tool and
@@ -45,9 +45,9 @@ public interface MComponentList extends MData {
         //   "e[i]"          -> edges
         //   "map[i]"        -> uvs
         //   "vtxFace[i][j]" -> vertices within faces
-        private String name;
-        private int startIndex; // Or -1 if "all"
-        private int endIndex;   // Inclusive
+        private final String name;
+        private final int startIndex; // Or -1 if "all"
+        private final int endIndex;   // Inclusive
 
         public String name() { return name; }
 
@@ -117,7 +117,7 @@ public interface MComponentList extends MData {
         }
     }
 
-    public void set(List<Component> value);
+    void set(List<Component> value);
 
-    public List<Component> get();
+    List<Component> get();
 }

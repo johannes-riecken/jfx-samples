@@ -39,7 +39,7 @@ import com.javafx.experiments.importers.maya.values.MCompound;
 import com.javafx.experiments.importers.maya.values.MData;
 
 public class MCompoundImpl extends MDataImpl implements MCompound {
-    private MData[] fieldData;
+    private final MData[] fieldData;
 
     public MCompoundImpl(MCompoundType type) {
         super(type);
@@ -87,10 +87,10 @@ public class MCompoundImpl extends MDataImpl implements MCompound {
     }
 
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < fieldData.length; i++) {
-            result += getCompoundType().getField(i).getName() + ":\t" + fieldData[i] + "\n";
+            result.append(getCompoundType().getField(i).getName()).append(":\t").append(fieldData[i]).append("\n");
         }
-        return result;
+        return result.toString();
     }
 }

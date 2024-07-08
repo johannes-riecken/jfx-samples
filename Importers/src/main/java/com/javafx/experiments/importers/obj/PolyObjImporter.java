@@ -89,14 +89,14 @@ public class PolyObjImporter {
         return meshes.keySet();
     }
 
-    private Map<String, PolygonMesh> meshes = new HashMap<>();
-    private Map<String, Material> materials = new HashMap<>();
-    private List<Map<String, Material>> materialLibrary = new ArrayList<>();
+    private final Map<String, PolygonMesh> meshes = new HashMap<>();
+    private final Map<String, Material> materials = new HashMap<>();
+    private final List<Map<String, Material>> materialLibrary = new ArrayList<>();
     private String objFilename;
 
-    public PolyObjImporter(String filename) throws FileNotFoundException, IOException {
+    public PolyObjImporter(String filename) throws IOException {
         this.objFilename = filename;
-        log("Reading filename = " + filename);;
+        log("Reading filename = " + filename);
         read(new URL(filename).openStream());
     }
 
@@ -137,12 +137,12 @@ public class PolyObjImporter {
         PolyObjImporter.scale = scale;
     }
 
-    private FloatArrayList vertexes = new FloatArrayList();
-    private FloatArrayList uvs = new FloatArrayList();
-    private List<int[]> faces = new ArrayList<>();
-    private IntegerArrayList smoothingGroups = new IntegerArrayList();
-    private FloatArrayList normals = new FloatArrayList();
-    private List<int[]> faceNormals = new ArrayList<>();
+    private final FloatArrayList vertexes = new FloatArrayList();
+    private final FloatArrayList uvs = new FloatArrayList();
+    private final List<int[]> faces = new ArrayList<>();
+    private final IntegerArrayList smoothingGroups = new IntegerArrayList();
+    private final FloatArrayList normals = new FloatArrayList();
+    private final List<int[]> faceNormals = new ArrayList<>();
     private Material material = new PhongMaterial(Color.WHITE);
     private int facesStart = 0;
     private int facesNormalStart = 0;

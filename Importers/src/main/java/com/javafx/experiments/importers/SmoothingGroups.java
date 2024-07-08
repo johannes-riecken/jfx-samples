@@ -45,16 +45,17 @@ import javafx.scene.shape.TriangleMesh;
 
 /** Util for converting Normals to Smoothing Groups */
 public class SmoothingGroups {
-    private BitSet visited, notVisited;
-    private Queue<Integer> q;
+    private final BitSet visited;
+    private final BitSet notVisited;
+    private final Queue<Integer> q;
 
-    private int[][] faces;
-    private int[][] faceNormals;
-    private float[] normals;
+    private final int[][] faces;
+    private final int[][] faceNormals;
+    private final float[] normals;
 
     private Edge[][] faceEdges;
 
-    public SmoothingGroups(int faces[][], int[][] faceNormals, float[] normals) {
+    public SmoothingGroups(int[][] faces, int[][] faceNormals, float[] normals) {
         this.faces = faces;
         this.faceNormals = faceNormals;
         this.normals = normals;
@@ -265,10 +266,7 @@ public class SmoothingGroups {
             if (this.from != other.from) {
                 return false;
             }
-            if (this.to != other.to) {
-                return false;
-            }
-            return true;
+            return this.to == other.to;
         }
     }
 
@@ -295,16 +293,12 @@ public class SmoothingGroups {
         int faceElementSize = mesh.getFaceElementSize();
         int[][] faces = new int[flatFaces.length/faceElementSize][faceElementSize];
         for (int f = 0; f < faces.length; f++) {
-            for (int e = 0; e < faceElementSize; e++) {
-                faces[f][e] = flatFaces[f * faceElementSize + e];
-            }
+            System.arraycopy(flatFaces, f * faceElementSize, faces[f], 0, faceElementSize);
         }
         int pointElementSize = mesh.getPointElementSize();
         int[][] faceNormals = new int[flatFaceNormals.length/pointElementSize][pointElementSize];
         for (int f = 0; f < faceNormals.length; f++) {
-            for (int e = 0; e < pointElementSize; e++) {
-                faceNormals[f][e] = flatFaceNormals[f * pointElementSize + e];
-            }
+            System.arraycopy(flatFaceNormals, f * pointElementSize, faceNormals[f], 0, pointElementSize);
         }
         SmoothingGroups smoothGroups = new SmoothingGroups(faces, faceNormals, normals);
         return smoothGroups.calcSmoothGroups();

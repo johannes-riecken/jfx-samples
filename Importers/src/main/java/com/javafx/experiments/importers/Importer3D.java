@@ -96,7 +96,7 @@ public final class Importer3D {
         if (dot <= 0) {
             throw new IOException("Unknown 3D file format, url missing extension [" + fileUrl + "]");
         }
-        final String extension = fileUrl.substring(dot + 1, fileUrl.length()).toLowerCase();
+        final String extension = fileUrl.substring(dot + 1).toLowerCase();
         // Reference all the importer jars
         ImporterFinder finder = new ImporterFinder();
         URLClassLoader classLoader = finder.addUrlToClassPath();
@@ -124,8 +124,7 @@ public final class Importer3D {
                 try {
                     Class<?> clazz = Class.forName(name);
                     Object obj = clazz.getDeclaredConstructor().newInstance();
-                    if (obj instanceof Importer) {
-                        Importer plugin = (Importer) obj;
+                    if (obj instanceof Importer plugin) {
                         if (plugin.isSupported(extension)) {
                             importer = plugin;
                             fail = false;

@@ -602,8 +602,7 @@ public class Translate2D extends BaseTransform {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof BaseTransform) {
-            BaseTransform tx = (BaseTransform) obj;
+        if (obj instanceof BaseTransform tx) {
             return (tx.isTranslateOrIdentity() &&
                     tx.getMxt() == this.mxt &&
                     tx.getMyt() == this.myt);

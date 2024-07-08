@@ -75,8 +75,8 @@ import com.javafx.experiments.jfx3dviewer.AutoScalingGroup;
  */
 public class Height2NormalApp  extends Application {
     private Image testImage;
-    private SimpleObjectProperty<Image> heightImage = new SimpleObjectProperty<>();
-    private SimpleObjectProperty<Image> normalImage = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Image> heightImage = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Image> normalImage = new SimpleObjectProperty<>();
     private File heightFile;
     private Stage stage;
 
@@ -176,7 +176,7 @@ public class Height2NormalApp  extends Application {
         private final Rotate cameraLookXRotate = new Rotate(0,0,0,0,Rotate.X_AXIS);
         private final Rotate cameraLookZRotate = new Rotate(0,0,0,0,Rotate.Z_AXIS);
         private final Translate cameraPosition = new Translate(0,0,-7);
-        private AutoScalingGroup autoScalingGroup = new AutoScalingGroup(2);
+        private final AutoScalingGroup autoScalingGroup = new AutoScalingGroup(2);
 
         public SubScene create() {
             SubScene scene = new SubScene(root3D,512,512,true,null);

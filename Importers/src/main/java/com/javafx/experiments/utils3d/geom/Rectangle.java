@@ -338,11 +338,10 @@ public class Rectangle {
         th += ty;
         ch += cy;
         if (ch <= cy) {
-            if (th >= ty || ch > th) return false;
+            return th < ty && ch <= th;
         } else {
-            if (th >= ty && ch > th) return false;
+            return th < ty || ch <= th;
         }
-        return true;
     }
 
     public Rectangle intersection(Rectangle r) {
@@ -679,8 +678,7 @@ public class Rectangle {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Rectangle) {
-            Rectangle r = (Rectangle) obj;
+        if (obj instanceof Rectangle r) {
             return ((x == r.x) &&
                     (y == r.y) &&
                     (width == r.width) &&

@@ -139,7 +139,7 @@ public class MayaImporter extends Importer {
                         (
                                 new KeyFrame(
                                         javafx.util.Duration.millis(e.getKey() * 1000f),
-                                        (KeyValue[]) e.getValue().toArray(new KeyValue[e.getValue().size()])));
+                                        e.getValue().toArray(new KeyValue[e.getValue().size()])));
                 count++;
             }
 

@@ -32,6 +32,7 @@
 package com.javafx.experiments.importers.obj;
 
 
+import java.io.Serial;
 import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -350,7 +351,7 @@ public class FloatArrayList extends AbstractList<Float>
     // Positional Access Operations
 
     @SuppressWarnings("unchecked") Float elementData(int index) {
-        return (Float) elementData[index];
+        return elementData[index];
     }
 
     /**
@@ -665,6 +666,7 @@ public class FloatArrayList extends AbstractList<Float>
     }
 
     /** Reconstitute the <tt>ArrayList</tt> instance from a stream (that is, deserialize it). */
+    @Serial
     private void readObject(java.io.ObjectInputStream s)
             throws java.io.IOException, ClassNotFoundException {
         // Read in size, and any hidden stuff
@@ -737,7 +739,7 @@ public class FloatArrayList extends AbstractList<Float>
             if (i >= elementData.length)
                 throw new ConcurrentModificationException();
             cursor = i + 1;
-            return (Float) elementData[lastRet = i];
+            return elementData[lastRet = i];
         }
 
         @Override public void remove() {
@@ -790,7 +792,7 @@ public class FloatArrayList extends AbstractList<Float>
             if (i >= elementData.length)
                 throw new ConcurrentModificationException();
             cursor = i;
-            return (Float) elementData[lastRet = i];
+            return elementData[lastRet = i];
         }
 
         @Override public void set(Float e) {
@@ -972,7 +974,7 @@ public class FloatArrayList extends AbstractList<Float>
                     if (offset + i >= elementData.length)
                         throw new ConcurrentModificationException();
                     cursor = i + 1;
-                    return (Float) elementData[offset + (lastRet = i)];
+                    return elementData[offset + (lastRet = i)];
                 }
 
                 @Override public boolean hasPrevious() {
@@ -989,7 +991,7 @@ public class FloatArrayList extends AbstractList<Float>
                     if (offset + i >= elementData.length)
                         throw new ConcurrentModificationException();
                     cursor = i;
-                    return (Float) elementData[offset + (lastRet = i)];
+                    return elementData[offset + (lastRet = i)];
                 }
 
                 @Override public int nextIndex() {
@@ -1041,7 +1043,7 @@ public class FloatArrayList extends AbstractList<Float>
                     }
                 }
 
-                final void checkForComodification() {
+                void checkForComodification() {
                     if (expectedModCount != FloatArrayList.this.modCount)
                         throw new ConcurrentModificationException();
                 }

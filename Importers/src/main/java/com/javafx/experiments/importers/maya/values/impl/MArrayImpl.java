@@ -47,7 +47,7 @@ public class MArrayImpl extends MDataImpl implements MArray {
     List<MData> data = new ArrayList();
 
     static class Parser {
-        private MArray array;
+        private final MArray array;
 
         Parser(MArray array) {
             this.array = array;
@@ -64,16 +64,16 @@ public class MArrayImpl extends MDataImpl implements MArray {
         }
     }
 
-    class MArraySlice extends MDataImpl implements MArray {
-        private MArray array;
-        private int base;
-        private int length;
+    static class MArraySlice extends MDataImpl implements MArray {
+        private final MArray array;
+        private final int base;
+        private final int length;
 
         MArraySlice(
                 MArray array,
                 int base,
                 int length) {
-            super((MArrayType) array.getType());
+            super(array.getType());
             this.array = array;
             this.base = base;
             this.length = length;

@@ -282,9 +282,9 @@ public class SettingsController implements Initializable {
                 throw new UnsupportedOperationException("Not supported yet."); //Not needed so far
             }
         };
-        widthColumn.setCellFactory(TextFieldTreeTableCell.<Node, Double>forTreeTableColumn(niceDoubleStringConverter));
-        heightColumn.setCellFactory(TextFieldTreeTableCell.<Node, Double>forTreeTableColumn(niceDoubleStringConverter));
-        depthColumn.setCellFactory(TextFieldTreeTableCell.<Node, Double>forTreeTableColumn(niceDoubleStringConverter));
+        widthColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(niceDoubleStringConverter));
+        heightColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(niceDoubleStringConverter));
+        depthColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(niceDoubleStringConverter));
         heightColumn.setCellValueFactory(p -> new ObjectBinding<Double>() {
             {  bind(p.getValue().getValue().boundsInLocalProperty()); }
             @Override protected Double computeValue() {
@@ -354,7 +354,7 @@ public class SettingsController implements Initializable {
 
     private class Power10DoubleBinding extends DoubleBinding {
 
-        private DoubleProperty prop;
+        private final DoubleProperty prop;
 
         public Power10DoubleBinding(DoubleProperty prop) {
             this.prop = prop;

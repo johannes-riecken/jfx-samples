@@ -44,7 +44,7 @@ public class NavigationController implements Initializable {
 //    public FourWayNavControl eyeNav;
     public ScrollBar zoomBar;
 //    public FourWayNavControl camNav;
-    private ContentModel contentModel = Jfx3dViewerApp.getContentModel();
+    private final ContentModel contentModel = Jfx3dViewerApp.getContentModel();
 
     @Override public void initialize(URL location, ResourceBundle resources) {
         zoomBar.setMin(-100);

@@ -33,11 +33,11 @@
 package com.javafx.experiments.importers.maya.values;
 
 public interface MIntArray extends MData {
-    public void set(int index, int x);
+    void set(int index, int x);
 
-    public int[] get();
+    int[] get();
 
-    public int get(int index);
+    int get(int index);
 
-    public int getSize();
+    int getSize();
 }

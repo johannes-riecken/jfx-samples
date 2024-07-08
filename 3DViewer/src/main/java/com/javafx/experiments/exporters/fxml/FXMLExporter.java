@@ -65,9 +65,9 @@ import javafx.scene.transform.Translate;
 /** Export a 3D MeshView to FXML file. */
 public class FXMLExporter {
 
-    private PrintWriter printWriter;
-    private Set<String> imports = new TreeSet<>();
-    private Map<String, String> simpleNames = new HashMap<>();
+    private final PrintWriter printWriter;
+    private final Set<String> imports = new TreeSet<>();
+    private final Map<String, String> simpleNames = new HashMap<>();
 
     public FXMLExporter(String filename) {
         File file = new File(filename);
@@ -162,7 +162,7 @@ public class FXMLExporter {
         return res;
     }
 
-    private Map<Class, List<Property>> propertiesCache = new HashMap<>();
+    private final Map<Class, List<Property>> propertiesCache = new HashMap<>();
 
     private class Property {
         Method getter;
@@ -196,8 +196,7 @@ public class FXMLExporter {
                 Object[] parameters = new Object[property.getter.getParameterTypes().length];
                 Object value = property.getter.invoke(object, parameters);
                 if (value != null) {
-                    if (value instanceof Collection) {
-                        Collection collection = (Collection) value;
+                    if (value instanceof Collection collection) {
                         if (!collection.isEmpty()) {
                             FXML container = fxml.addContainer(property.name);
                             for (Object item : collection) {
@@ -229,7 +228,7 @@ public class FXMLExporter {
     }
 
     private class FXML {
-        private String tagName;
+        private final String tagName;
         List<Entry> properties;
         List<FXML> nested;
         Object value;

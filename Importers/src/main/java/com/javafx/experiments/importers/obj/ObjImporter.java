@@ -93,12 +93,12 @@ public class ObjImporter {
         return meshes.keySet();
     }
 
-    private Map<String, TriangleMesh> meshes = new HashMap<>();
-    private Map<String, Material> materials = new HashMap<>();
-    private List<Map<String, Material>> materialLibrary = new ArrayList<>();
+    private final Map<String, TriangleMesh> meshes = new HashMap<>();
+    private final Map<String, Material> materials = new HashMap<>();
+    private final List<Map<String, Material>> materialLibrary = new ArrayList<>();
     private String objFileUrl;
 
-    public ObjImporter(String objFileUrl) throws FileNotFoundException, IOException {
+    public ObjImporter(String objFileUrl) throws IOException {
         this.objFileUrl = objFileUrl;
         log("Reading filename = " + objFileUrl);
         read(new URL(objFileUrl).openStream());
@@ -141,12 +141,12 @@ public class ObjImporter {
         ObjImporter.scale = scale;
     }
 
-    private FloatArrayList vertexes = new FloatArrayList();
-    private FloatArrayList uvs = new FloatArrayList();
-    private IntegerArrayList faces = new IntegerArrayList();
-    private IntegerArrayList smoothingGroups = new IntegerArrayList();
-    private FloatArrayList normals = new FloatArrayList();
-    private IntegerArrayList faceNormals = new IntegerArrayList();
+    private final FloatArrayList vertexes = new FloatArrayList();
+    private final FloatArrayList uvs = new FloatArrayList();
+    private final IntegerArrayList faces = new IntegerArrayList();
+    private final IntegerArrayList smoothingGroups = new IntegerArrayList();
+    private final FloatArrayList normals = new FloatArrayList();
+    private final IntegerArrayList faceNormals = new IntegerArrayList();
     private Material material = new PhongMaterial(Color.WHITE);
     private int facesStart = 0;
     private int facesNormalStart = 0;

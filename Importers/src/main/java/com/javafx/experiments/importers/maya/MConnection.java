@@ -35,8 +35,8 @@ package com.javafx.experiments.importers.maya;
 import java.util.Comparator;
 
 public class MConnection {
-    private MPath sourcePath;
-    private MPath targetPath;
+    private final MPath sourcePath;
+    private final MPath targetPath;
 
     public MConnection(MPath sourcePath, MPath targetPath) {
         this.sourcePath = sourcePath;
@@ -52,10 +52,9 @@ public class MConnection {
     }
 
     public boolean equals(Object arg) {
-        if (!(arg instanceof MConnection)) {
+        if (!(arg instanceof MConnection other)) {
             return false;
         }
-        MConnection other = (MConnection) arg;
         return (sourcePath.equals(other.sourcePath) &&
                 targetPath.equals(other.targetPath));
     }

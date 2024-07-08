@@ -42,7 +42,7 @@ public class MIntArrayImpl extends MDataImpl implements MIntArray {
     private int[] data;
 
     static class Parser {
-        private MIntArray array;
+        private final MIntArray array;
 
         Parser(MIntArray array) {
             this.array = array;
@@ -59,15 +59,15 @@ public class MIntArrayImpl extends MDataImpl implements MIntArray {
     }
 
     static class MIntArraySlice extends MDataImpl implements MIntArray {
-        private MIntArray array;
-        private int base;
-        private int length;
+        private final MIntArray array;
+        private final int base;
+        private final int length;
 
         MIntArraySlice(
                 MIntArray array,
                 int base,
                 int length) {
-            super((MIntArrayType) array.getType());
+            super(array.getType());
             this.array = array;
             this.base = base;
             this.length = length;

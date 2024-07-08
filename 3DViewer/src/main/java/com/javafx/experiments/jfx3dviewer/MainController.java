@@ -101,7 +101,7 @@ public class MainController implements Initializable {
     private String loadedURL;
     private String[] supportedFormatRegex;
     private TimelineController timelineController;
-    private SessionManager sessionManager = SessionManager.getSessionManager();
+    private final SessionManager sessionManager = SessionManager.getSessionManager();
 
     @Override public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -314,7 +314,7 @@ public class MainController implements Initializable {
         chooser.setTitle("Export 3D Model");
         File newFile = chooser.showSaveDialog(openMenuBtn.getScene().getWindow());
         if (newFile != null) {
-            String extension = newFile.getName().substring(newFile.getName().lastIndexOf('.')+1,newFile.getName().length()).toLowerCase();
+            String extension = newFile.getName().substring(newFile.getName().lastIndexOf('.')+1).toLowerCase();
 //            System.out.println("extension = " + extension);
             if ("java".equals(extension)) {
                 final String url = loadedURL;

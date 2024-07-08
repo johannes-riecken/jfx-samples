@@ -40,7 +40,7 @@ import com.javafx.experiments.importers.maya.values.MData;
 
 public abstract class MDataImpl implements MData {
 
-    private MDataType dataType;
+    private final MDataType dataType;
 
     public MEnv getEnv() {
         return getType().getEnv();

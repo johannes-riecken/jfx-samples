@@ -42,7 +42,7 @@ public class MFloat2ArrayImpl extends MDataImpl implements MFloat2Array {
     private float[] data;
 
     static class Parser {
-        private MFloat2Array array;
+        private final MFloat2Array array;
 
         Parser(MFloat2Array array) {
             this.array = array;
@@ -60,15 +60,15 @@ public class MFloat2ArrayImpl extends MDataImpl implements MFloat2Array {
     }
 
     static class MFloat2ArraySlice extends MDataImpl implements MFloat2Array {
-        private MFloat2Array array;
-        private int base;
-        private int length;
+        private final MFloat2Array array;
+        private final int base;
+        private final int length;
 
         MFloat2ArraySlice(
                 MFloat2Array array,
                 int base,
                 int length) {
-            super((MFloat2ArrayType) array.getType());
+            super(array.getType());
             this.array = array;
             this.base = base;
             this.length = length;
@@ -114,7 +114,7 @@ public class MFloat2ArrayImpl extends MDataImpl implements MFloat2Array {
     }
 
     public void set(int index, float x, float y) {
-        data[2 * index + 0] = x;
+        data[2 * index] = x;
         data[2 * index + 1] = y;
     }
 

@@ -33,13 +33,13 @@
 package com.javafx.experiments.importers.maya.values;
 
 public interface MFloat2 extends MData {
-    public void set(float x, float y);
+    void set(float x, float y);
 
-    public float[] get();
+    float[] get();
 
-    public float getX();
+    float getX();
 
-    public float getY();
+    float getY();
 
-    public float get(int index);
+    float get(int index);
 }

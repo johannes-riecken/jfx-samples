@@ -517,8 +517,7 @@ public class BoxBounds extends BaseBounds {
         if (minZ != other.getMinZ()) return false;
         if (maxX != other.getMaxX()) return false;
         if (maxY != other.getMaxY()) return false;
-        if (maxZ != other.getMaxZ()) return false;
-        return true;
+        return maxZ == other.getMaxZ();
     }
 
     @Override

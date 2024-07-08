@@ -47,7 +47,7 @@ import javafx.geometry.Point2D;
  */
 public class SymbolicSubdivisionBuilder {
 
-    private SymbolicPolygonMesh oldMesh;
+    private final SymbolicPolygonMesh oldMesh;
     private Map<Edge, EdgeInfo> edgeInfos;
     private FaceInfo[] faceInfos;
     private PointInfo[] pointInfos;
@@ -55,8 +55,8 @@ public class SymbolicSubdivisionBuilder {
     private float[] texCoords;
     private int[] reindex;
     private int newTexCoordIndex;
-    private SubdivisionMesh.BoundaryMode boundaryMode;
-    private SubdivisionMesh.MapBorderMode mapBorderMode;
+    private final SubdivisionMesh.BoundaryMode boundaryMode;
+    private final SubdivisionMesh.MapBorderMode mapBorderMode;
 
     public SymbolicSubdivisionBuilder(SymbolicPolygonMesh oldMesh, SubdivisionMesh.BoundaryMode boundaryMode, SubdivisionMesh.MapBorderMode mapBorderMode) {
         this.oldMesh = oldMesh;
@@ -329,10 +329,7 @@ public class SymbolicSubdivisionBuilder {
             if (this.from != other.from) {
                 return false;
             }
-            if (this.to != other.to) {
-                return false;
-            }
-            return true;
+            return this.to == other.to;
         }
     }
 

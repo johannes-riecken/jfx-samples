@@ -72,9 +72,9 @@ public class JavaSourceExporter {
     private int translateCount = 0;
     private int rotateCount = 0;
     private int scaleCount = 0;
-    private Map<WritableValue,String> writableVarMap = new HashMap<>();
-    private StringBuilder nodeCode = new StringBuilder();
-    private StringBuilder timelineCode = new StringBuilder();
+    private final Map<WritableValue,String> writableVarMap = new HashMap<>();
+    private final StringBuilder nodeCode = new StringBuilder();
+    private final StringBuilder timelineCode = new StringBuilder();
     private final boolean hasTimeline;
     private final String baseUrl;
     private final String className;
@@ -268,14 +268,11 @@ public class JavaSourceExporter {
             for (int i=0; i< node.getTransforms().size(); i++) {
                 if (i!=0) nodeCode.append(",\n");
                 Transform transform = node.getTransforms().get(i);
-                if (transform instanceof Translate) {
-                    Translate t = (Translate)transform;
+                if (transform instanceof Translate t) {
                     nodeCode.append(indent+"    "+storeTransform(t)+" = new Translate("+t.getX()+","+t.getY()+","+t.getZ()+")");
-                } else if (transform instanceof Scale) {
-                    Scale s = (Scale)transform;
+                } else if (transform instanceof Scale s) {
                     nodeCode.append(indent+"    "+storeTransform(s)+" = new Scale("+s.getX()+","+s.getY()+","+s.getZ()+","+s.getPivotX()+","+s.getPivotY()+","+s.getPivotZ()+")");
-                } else if (transform instanceof Rotate) {
-                    Rotate r = (Rotate)transform;
+                } else if (transform instanceof Rotate r) {
                     nodeCode.append(indent+"    "+storeTransform(r)+" = new Rotate("+r.getAngle()+","+r.getPivotX()+","+r.getPivotY()+","+r.getPivotZ()+",");
                     if (r.getAxis() == Rotate.X_AXIS) {
                         nodeCode.append("Rotate.X_AXIS");
@@ -296,27 +293,24 @@ public class JavaSourceExporter {
 
     private String storeTransform(Transform transform) {
         String varName;
-        if (transform instanceof Translate) {
+        if (transform instanceof Translate t) {
             final int index = translateCount ++;
             varName = "TRANS_"+index;
-            Translate t = (Translate)transform;
             writableVarMap.put(t.xProperty(),varName+".xProperty()");
             writableVarMap.put(t.yProperty(),varName+".yProperty()");
             writableVarMap.put(t.zProperty(),varName+".zProperty()");
-        } else if (transform instanceof Scale) {
+        } else if (transform instanceof Scale s) {
             final int index = scaleCount ++;
             varName = "SCALE_"+index;
-            Scale s = (Scale)transform;
             writableVarMap.put(s.xProperty(),varName+".xProperty()");
             writableVarMap.put(s.yProperty(),varName+".yProperty()");
             writableVarMap.put(s.zProperty(),varName+".zProperty()");
             writableVarMap.put(s.pivotXProperty(),varName+".pivotXProperty()");
             writableVarMap.put(s.pivotYProperty(),varName+".pivotYProperty()");
             writableVarMap.put(s.pivotZProperty(),varName+".pivotZProperty()");
-        } else if (transform instanceof Rotate) {
+        } else if (transform instanceof Rotate r) {
             final int index = rotateCount ++;
             varName = "ROT_"+index;
-            Rotate r = (Rotate)transform;
             writableVarMap.put(r.angleProperty(),varName+".angleProperty()");
         } else {
             throw new UnsupportedOperationException("Unknown Transform Type: "+transform.getClass());
@@ -466,11 +460,9 @@ public class JavaSourceExporter {
             return "Interpolator.EASE_OUT";
         } else if (interpolator == Interpolator.LINEAR) {
             return "Interpolator.LINEAR";
-        } else if (interpolator instanceof SplineInterpolator) {
-            SplineInterpolator si = (SplineInterpolator)interpolator;
+        } else if (interpolator instanceof SplineInterpolator si) {
             return "Interpolator.SPLINE("+si.getX1()+"d,"+si.getY1()+"d,"+si.getX2()+"d,"+si.getY2()+"d)";
-        } else if (interpolator instanceof NumberTangentInterpolator) {
-            NumberTangentInterpolator ti = (NumberTangentInterpolator)interpolator;
+        } else if (interpolator instanceof NumberTangentInterpolator ti) {
             return "Interpolator.TANGENT(Duration.millis("+ TickCalculation.toMillis((long)ti.getInTicks())+"d),"+ti.getInValue()
                     +"d,Duration.millis("+TickCalculation.toMillis((long)ti.getInTicks())+"d),"+ti.getOutValue()+"d)";
         } else {

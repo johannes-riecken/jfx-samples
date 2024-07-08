@@ -210,8 +210,7 @@ public class Vec3f {
         if (obj == this) {
             return true;
         }
-        if (obj instanceof Vec3f) {
-            Vec3f v = (Vec3f) obj;
+        if (obj instanceof Vec3f v) {
             return (x == v.x) && (y == v.y) && (z == v.z);
         }
         return false;

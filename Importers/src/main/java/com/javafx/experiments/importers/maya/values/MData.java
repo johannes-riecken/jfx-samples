@@ -38,27 +38,27 @@ import com.javafx.experiments.importers.maya.MEnv;
 import com.javafx.experiments.importers.maya.types.MDataType;
 
 public interface MData {
-    public MEnv getEnv();
+    MEnv getEnv();
 
-    public MDataType getType();
+    MDataType getType();
 
-    public void setSize(int size);
+    void setSize(int size);
 
-    public void parse(String field, List<String> values);
+    void parse(String field, List<String> values);
 
-    public void parse(List<String> values);
+    void parse(List<String> values);
 
-    public void parse(Iterator<String> iter);
+    void parse(Iterator<String> iter);
 
     /** Get the data associated with the given string path. */
-    public MData getData(String path);
+    MData getData(String path);
 
     /** Field access for those values which support it, such as compound values. */
-    public MData getFieldData(String name);
+    MData getFieldData(String name);
 
     /** Index access for those values which suport it, such as array values. */
-    public MData getData(int index);
+    MData getData(int index);
 
     /** Slice access for those values which support it, such as array values. */
-    public MData getData(int start, int end);
+    MData getData(int start, int end);
 }

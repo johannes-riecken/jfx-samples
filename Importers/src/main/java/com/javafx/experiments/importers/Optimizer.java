@@ -66,11 +66,11 @@ import javafx.util.Duration;
  */
 public class Optimizer {
 
-    private Timeline timeline;
-    private Node root;
-    private Set<Transform> bound = new HashSet<>();
-    private List<Parent> emptyParents = new ArrayList<>();
-    private List<MeshView> meshViews = new ArrayList<>();
+    private final Timeline timeline;
+    private final Node root;
+    private final Set<Transform> bound = new HashSet<>();
+    private final List<Parent> emptyParents = new ArrayList<>();
+    private final List<MeshView> meshViews = new ArrayList<>();
     private boolean convertToDiscrete = true;
 
     public Optimizer(Timeline timeline, Node root) {
@@ -126,9 +126,8 @@ public class Optimizer {
                 }
             }
         }
-        if (node instanceof Parent) {
+        if (node instanceof Parent p) {
             groupsTotal++;
-            Parent p = (Parent) node;
             for (Node n : p.getChildrenUnmodifiable()) {
                 optimize(n);
             }
@@ -510,8 +509,7 @@ public class Optimizer {
             // collecting bound targets
             for (KeyValue keyValue : keyFrame.getValues()) {
                 WritableValue<?> target = keyValue.getTarget();
-                if (target instanceof Property) {
-                    Property p = (Property) target;
+                if (target instanceof Property p) {
                     Object bean = p.getBean();
                     if (bean instanceof Transform) {
                         bound.add((Transform) bean);

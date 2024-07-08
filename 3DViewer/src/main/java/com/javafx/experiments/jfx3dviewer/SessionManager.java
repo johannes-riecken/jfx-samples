@@ -52,8 +52,8 @@ public class SessionManager {
 
     public final String SESSION_PROPERTIES_FILENAME;
     private static final boolean ENABLE_SAVE_SESSION = true;
-    private String name;
-    private Properties props = new Properties();
+    private final String name;
+    private final Properties props = new Properties();
 
     private SessionManager(String name) {
         this.name = name;

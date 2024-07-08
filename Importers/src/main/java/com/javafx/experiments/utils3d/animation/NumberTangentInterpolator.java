@@ -103,10 +103,7 @@ public class NumberTangentInterpolator extends Interpolator {
         if (this.inTicks != other.inTicks) {
             return false;
         }
-        if (this.outTicks != other.outTicks) {
-            return false;
-        }
-        return true;
+        return this.outTicks == other.outTicks;
     }
 
     @Override

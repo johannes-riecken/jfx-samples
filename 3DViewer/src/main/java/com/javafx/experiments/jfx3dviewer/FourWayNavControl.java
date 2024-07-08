@@ -47,7 +47,7 @@ public class FourWayNavControl extends GridPane {
 
     private FourWayListener listener;
     private Side currentDirection = null;
-    private Timeline eventFiringTimeline;
+    private final Timeline eventFiringTimeline;
     private boolean hasFired = false;
 
     public FourWayNavControl() {
@@ -126,7 +126,7 @@ public class FourWayNavControl extends GridPane {
         this.listener = listener;
     }
 
-    public static interface FourWayListener {
-        public void navigateStep(Side direction, double amount);
+    public interface FourWayListener {
+        void navigateStep(Side direction, double amount);
     }
 }

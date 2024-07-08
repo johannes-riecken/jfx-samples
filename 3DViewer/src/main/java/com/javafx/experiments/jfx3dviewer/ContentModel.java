@@ -76,19 +76,19 @@ public class ContentModel {
     private final Xform cameraXform3 = new Xform();
     private final double cameraDistance = 200;
     private double dragStartX, dragStartY, dragStartRotateX, dragStartRotateY;
-    private ObjectProperty<Node> content = new SimpleObjectProperty<>();
-    private AutoScalingGroup autoScalingGroup = new AutoScalingGroup(2);
+    private final ObjectProperty<Node> content = new SimpleObjectProperty<>();
+    private final AutoScalingGroup autoScalingGroup = new AutoScalingGroup(2);
     private Box xAxis, yAxis, zAxis;
     private Sphere xSphere, ySphere, zSphere;
-    private AmbientLight ambientLight = new AmbientLight(Color.DARKGREY);
-    private PointLight light1 = new PointLight(Color.WHITE);
-    private PointLight light2 = new PointLight(Color.ANTIQUEWHITE);
-    private PointLight light3 = new PointLight(Color.ALICEBLUE);
+    private final AmbientLight ambientLight = new AmbientLight(Color.DARKGREY);
+    private final PointLight light1 = new PointLight(Color.WHITE);
+    private final PointLight light2 = new PointLight(Color.ANTIQUEWHITE);
+    private final PointLight light3 = new PointLight(Color.ALICEBLUE);
     private final SimpleObjectProperty<Timeline> timeline = new SimpleObjectProperty<>();
     public Timeline getTimeline() { return timeline.get(); }
     public SimpleObjectProperty<Timeline> timelineProperty() { return timeline; }
     public void setTimeline(Timeline timeline) { this.timeline.set(timeline); }
-    private SimpleBooleanProperty ambientLightEnabled = new SimpleBooleanProperty(false){
+    private final SimpleBooleanProperty ambientLightEnabled = new SimpleBooleanProperty(false){
         @Override protected void invalidated() {
             if (get()) {
                 root3D.getChildren().add(ambientLight);
@@ -97,7 +97,7 @@ public class ContentModel {
             }
         }
     };
-    private SimpleBooleanProperty light1Enabled = new SimpleBooleanProperty(false){
+    private final SimpleBooleanProperty light1Enabled = new SimpleBooleanProperty(false){
         @Override protected void invalidated() {
             if (get()) {
                 root3D.getChildren().add(light1);
@@ -106,7 +106,7 @@ public class ContentModel {
             }
         }
     };
-    private SimpleBooleanProperty light2Enabled = new SimpleBooleanProperty(false){
+    private final SimpleBooleanProperty light2Enabled = new SimpleBooleanProperty(false){
         @Override protected void invalidated() {
             if (get()) {
                 root3D.getChildren().add(light2);
@@ -115,7 +115,7 @@ public class ContentModel {
             }
         }
     };
-    private SimpleBooleanProperty light3Enabled = new SimpleBooleanProperty(false){
+    private final SimpleBooleanProperty light3Enabled = new SimpleBooleanProperty(false){
         @Override protected void invalidated() {
             if (get()) {
                 root3D.getChildren().add(light3);
@@ -124,7 +124,7 @@ public class ContentModel {
             }
         }
     };
-    private SimpleBooleanProperty showAxis = new SimpleBooleanProperty(false){
+    private final SimpleBooleanProperty showAxis = new SimpleBooleanProperty(false){
         @Override protected void invalidated() {
             if (get()) {
                 if (xAxis == null) createAxes();
@@ -140,8 +140,8 @@ public class ContentModel {
             }
         }
     };
-    private Rotate yUpRotate = new Rotate(0,0,0,0,Rotate.X_AXIS);
-    private SimpleBooleanProperty yUp = new SimpleBooleanProperty(false){
+    private final Rotate yUpRotate = new Rotate(0,0,0,0,Rotate.X_AXIS);
+    private final SimpleBooleanProperty yUp = new SimpleBooleanProperty(false){
         @Override protected void invalidated() {
             if (get()) {
                 yUpRotate.setAngle(180);
@@ -154,7 +154,7 @@ public class ContentModel {
             }
         }
     };
-    private SimpleBooleanProperty msaa = new SimpleBooleanProperty(){
+    private final SimpleBooleanProperty msaa = new SimpleBooleanProperty(){
         @Override protected void invalidated() {
             rebuildSubScene();
         }
@@ -216,7 +216,7 @@ public class ContentModel {
 
             double flip = -1.0;
 
-            boolean alt = (true || event.isAltDown());  // For now, don't require ALT to be pressed
+            boolean alt = (true);  // For now, don't require ALT to be pressed
             if (alt && (event.isMiddleButtonDown() || (event.isPrimaryButtonDown() && event.isSecondaryButtonDown()))) {
                 cameraXform2.t.setX(cameraXform2.t.getX() + flip*mouseDeltaX*modifierFactor*modifier*0.3);  // -
                 cameraXform2.t.setY(cameraXform2.t.getY() + yFlip*mouseDeltaY*modifierFactor*modifier*0.3);  // -
@@ -315,7 +315,7 @@ public class ContentModel {
                     cameraXform.rx.setAngle(cameraXform.rx.getAngle() - 10.0*ALT_MULTIPLIER);
                 }
                 else if (event.isControlDown()) {
-                    cameraXform2.t.setY(cameraXform2.t.getY() - 1.0*CONTROL_MULTIPLIER);
+                    cameraXform2.t.setY(cameraXform2.t.getY() - CONTROL_MULTIPLIER);
                 }
                 else if (event.isAltDown()) {
                     cameraXform.rx.setAngle(cameraXform.rx.getAngle() - 2.0*ALT_MULTIPLIER);
@@ -334,7 +334,7 @@ public class ContentModel {
                     cameraXform.rx.setAngle(cameraXform.rx.getAngle() + 10.0*ALT_MULTIPLIER);
                 }
                 else if (event.isControlDown()) {
-                    cameraXform2.t.setY(cameraXform2.t.getY() + 1.0*CONTROL_MULTIPLIER);
+                    cameraXform2.t.setY(cameraXform2.t.getY() + CONTROL_MULTIPLIER);
                 }
                 else if (event.isAltDown()) {
                     cameraXform.rx.setAngle(cameraXform.rx.getAngle() + 2.0*ALT_MULTIPLIER);
@@ -353,7 +353,7 @@ public class ContentModel {
                     cameraXform.ry.setAngle(cameraXform.ry.getAngle() - 10.0*ALT_MULTIPLIER);
                 }
                 else if (event.isControlDown()) {
-                    cameraXform2.t.setX(cameraXform2.t.getX() + 1.0*CONTROL_MULTIPLIER);
+                    cameraXform2.t.setX(cameraXform2.t.getX() + CONTROL_MULTIPLIER);
                 }
                 else if (event.isShiftDown()) {
                     currentTime = timeline.getCurrentTime();
@@ -377,7 +377,7 @@ public class ContentModel {
                     cameraXform.ry.setAngle(cameraXform.ry.getAngle() + 10.0*ALT_MULTIPLIER);  // -
                 }
                 else if (event.isControlDown()) {
-                    cameraXform2.t.setX(cameraXform2.t.getX() - 1.0*CONTROL_MULTIPLIER);
+                    cameraXform2.t.setX(cameraXform2.t.getX() - CONTROL_MULTIPLIER);
                 }
                 else if (event.isShiftDown()) {
                     currentTime = timeline.getCurrentTime();

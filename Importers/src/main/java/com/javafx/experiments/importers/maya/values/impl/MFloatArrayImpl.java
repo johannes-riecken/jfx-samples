@@ -42,7 +42,7 @@ public class MFloatArrayImpl extends MDataImpl implements MFloatArray {
     private float[] data;
 
     static class Parser {
-        private MFloatArray array;
+        private final MFloatArray array;
 
         Parser(MFloatArray array) {
             this.array = array;
@@ -64,15 +64,15 @@ public class MFloatArrayImpl extends MDataImpl implements MFloatArray {
     }
 
     static class MFloatArraySlice extends MDataImpl implements MFloatArray {
-        private MFloatArray array;
-        private int base;
-        private int length;
+        private final MFloatArray array;
+        private final int base;
+        private final int length;
 
         MFloatArraySlice(
                 MFloatArray array,
                 int base,
                 int length) {
-            super((MFloatArrayType) array.getType());
+            super(array.getType());
             this.array = array;
             this.base = base;
             this.length = length;

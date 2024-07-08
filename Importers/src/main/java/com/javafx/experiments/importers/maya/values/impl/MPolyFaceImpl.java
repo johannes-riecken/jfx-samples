@@ -70,7 +70,7 @@ public class MPolyFaceImpl extends MDataImpl implements MPolyFace {
     }
 
     class Parser {
-        private Iterator<String> curArgs;
+        private final Iterator<String> curArgs;
 
         Parser(Iterator<String> args) {
             curArgs = args;

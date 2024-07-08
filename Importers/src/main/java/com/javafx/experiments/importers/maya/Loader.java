@@ -165,8 +165,8 @@ class Loader {
     // Loader.loadModel
     //=========================================================================
     void loadModel() {
-        startFrame = (int) Math.round(env.getPlaybackStart() - 1);
-        endFrame = (int) Math.round(env.getPlaybackEnd() - 1);
+        startFrame = Math.round(env.getPlaybackStart() - 1);
+        endFrame = Math.round(env.getPlaybackEnd() - 1);
         transformType = env.findNodeType("transform");
         jointType = env.findNodeType("joint");
         meshType = env.findNodeType("mesh");
@@ -301,7 +301,7 @@ class Loader {
             PolygonMeshView sourceMayaMeshView = (PolygonMeshView) sourceMayaMeshNode;
             PolygonMeshView targetMayaMeshView = (PolygonMeshView) targetMayaMeshNode;
 
-            PolygonMesh sourceMesh = (PolygonMesh) sourceMayaMeshView.getMesh();
+            PolygonMesh sourceMesh = sourceMayaMeshView.getMesh();
             SkinningMesh targetMesh = new SkinningMesh(sourceMesh, weights, bindPreMatrix, bindGlobalMatrix, jointNodes, new ArrayList(jointForest));
             targetMayaMeshView.setMesh(targetMesh);
 
@@ -329,8 +329,8 @@ class Loader {
         }
     }
 
-    private class SkinningMeshTimer extends AnimationTimer {
-        private SkinningMesh mesh;
+    private static class SkinningMeshTimer extends AnimationTimer {
+        private final SkinningMesh mesh;
         SkinningMeshTimer(SkinningMesh mesh) {
             this.mesh = mesh;
         }
@@ -343,7 +343,7 @@ class Loader {
     protected Image loadImageFromFtnAttr(MNode fileNode, String name) {
         Image image = null;
         MString fileName = (MString) fileNode.getAttr("ftn");
-        String imageFilename = (String) fileName.get();
+        String imageFilename = fileName.get();
         try {
             File file = new File(imageFilename);
             String filePath;
@@ -699,8 +699,7 @@ class Loader {
             // if (DEBUG) System.out.println("toNode = "+ toNode.getNodeType());
             if (toNode.isInstanceOf(transformType)) {
                 Node to = resolveNode(toNode);
-                if (to instanceof MayaGroup) {
-                    MayaGroup g = (MayaGroup) to;
+                if (to instanceof MayaGroup g) {
                     DoubleProperty ref = null;
                     String s = path.getComponentSelector();
                     // if (DEBUG) System.out.println("selector = " + s);
@@ -741,8 +740,7 @@ class Loader {
                     }
                 }
                 // [Note to Alex]: I've re-enabled joints, but not skinning yet [John]
-                if (to instanceof Joint) {
-                    Joint j = (Joint) to;
+                if (to instanceof Joint j) {
                     DoubleProperty ref = null;
                     String s = path.getComponentSelector();
                     // if (DEBUG) System.out.println("selector = " + s);
@@ -868,10 +866,10 @@ class Loader {
             }
         }
         if (tweaks == null) {
-            vert.set(verts[3 * index + 0], verts[3 * index + 1], verts[3 * index + 2]);
+            vert.set(verts[3 * index], verts[3 * index + 1], verts[3 * index + 2]);
         } else {
             vert.set(
-                    verts[3 * index + 0] + tweaks[3 * index + 0],
+                    verts[3 * index] + tweaks[3 * index],
                     verts[3 * index + 1] + tweaks[3 * index + 1],
                     verts[3 * index + 2] + tweaks[3 * index + 2]);
         }
@@ -908,7 +906,7 @@ class Loader {
     void convertAnimCurveRange(
             MNode n, final DoubleProperty property,
             boolean convertAnglesToDegrees) {
-        Collection inputs = n.getConnectionsTo("i");
+        Collection<MConnection> inputs = n.getConnectionsTo("i");
         boolean isDrivenAnimCurve = (inputs.size() > 0);
         boolean useTangentInterpolator = true;  // use the NEW tangent interpolator
 
@@ -1572,8 +1570,8 @@ class Loader {
 
 
     static class VertexHash {
-        private int vertexIndex;
-        private int normalIndex;
+        private final int vertexIndex;
+        private final int normalIndex;
         private int[] uvIndices;
 
         VertexHash(
@@ -1583,7 +1581,7 @@ class Loader {
             this.vertexIndex = vertexIndex;
             this.normalIndex = normalIndex;
             if (uvIndices != null) {
-                this.uvIndices = (int[]) uvIndices.clone();
+                this.uvIndices = uvIndices.clone();
             }
         }
 
@@ -1603,18 +1601,17 @@ class Loader {
 
         @Override
         public boolean equals(Object arg) {
-            if (arg == null || !(arg instanceof VertexHash)) {
+            if (arg == null || !(arg instanceof VertexHash other)) {
                 return false;
             }
 
-            VertexHash other = (VertexHash) arg;
             if (vertexIndex != other.vertexIndex) {
                 return false;
             }
             if (normalIndex != other.normalIndex) {
                 return false;
             }
-            if ((uvIndices != null) != (other.uvIndices != null)) {
+            if ((uvIndices == null) == (other.uvIndices != null)) {
                 return false;
             }
             if (uvIndices != null) {
@@ -1656,8 +1653,7 @@ class Loader {
 
         if (asPolygonMesh) {
             List<int[]> ff = new ArrayList<int[]>();
-            for (int f = 0; f < faces.size(); f++) {
-                MPolyFace.FaceData faceData = faces.get(f);
+            for (MPolyFace.FaceData faceData : faces) {
                 int[] faceEdges = faceData.getFaceEdges();
                 int[][] uvData = faceData.getUVData();
                 int[] uvIndices = uvData == null ? null : uvData[uvChannel];
@@ -1666,8 +1662,8 @@ class Loader {
                     for (int i = 0; i < faceEdges.length; i++) {
                         int vIndex = edgeStart(faceEdges[i]);
                         int uvIndex = uvIndices == null ? 0 : uvIndices[i];
-                        polyFace[i*2] = vIndex;
-                        polyFace[i*2+1] = uvIndex;
+                        polyFace[i * 2] = vIndex;
+                        polyFace[i * 2 + 1] = uvIndex;
                     }
                     ff.add(polyFace);
                 }
@@ -1703,8 +1699,7 @@ class Loader {
             List<Integer> nn = new ArrayList<Integer>();
             int nIndex = 0;
 
-            for (int f = 0; f < faces.size(); f++) {
-                MPolyFace.FaceData faceData = faces.get(f);
+            for (MPolyFace.FaceData faceData : faces) {
                 int[] faceEdges = faceData.getFaceEdges();
                 int[][] uvData = faceData.getUVData();
                 int[] uvIndices = uvData == null ? null : uvData[uvChannel];
@@ -1859,16 +1854,16 @@ class Loader {
         }
 
         Affine result = new Affine();
-        result.setMxx(mayaMatrix.get(0 * 4 + 0));
-        result.setMxy(mayaMatrix.get(1 * 4 + 0));
-        result.setMxz(mayaMatrix.get(2 * 4 + 0));
-        result.setMyx(mayaMatrix.get(0 * 4 + 1));
-        result.setMyy(mayaMatrix.get(1 * 4 + 1));
+        result.setMxx(mayaMatrix.get(0));
+        result.setMxy(mayaMatrix.get(4));
+        result.setMxz(mayaMatrix.get(2 * 4));
+        result.setMyx(mayaMatrix.get(1));
+        result.setMyy(mayaMatrix.get(4 + 1));
         result.setMyz(mayaMatrix.get(2 * 4 + 1));
-        result.setMzx(mayaMatrix.get(0 * 4 + 2));
-        result.setMzy(mayaMatrix.get(1 * 4 + 2));
+        result.setMzx(mayaMatrix.get(2));
+        result.setMzy(mayaMatrix.get(4 + 2));
         result.setMzz(mayaMatrix.get(2 * 4 + 2));
-        result.setTx(mayaMatrix.get(3 * 4 + 0));
+        result.setTx(mayaMatrix.get(3 * 4));
         result.setTy(mayaMatrix.get(3 * 4 + 1));
         result.setTz(mayaMatrix.get(3 * 4 + 2));
         return result;

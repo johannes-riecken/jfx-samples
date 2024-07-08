@@ -162,10 +162,7 @@ public class SplineInterpolator extends Interpolator {
         if (Double.doubleToLongBits(this.x2) != Double.doubleToLongBits(other.x2)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.y2) != Double.doubleToLongBits(other.y2)) {
-            return false;
-        }
-        return true;
+        return Double.doubleToLongBits(this.y2) == Double.doubleToLongBits(other.y2);
     }
 
     /**

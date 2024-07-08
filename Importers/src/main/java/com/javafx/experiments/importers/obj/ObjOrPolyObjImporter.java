@@ -49,12 +49,12 @@ public class ObjOrPolyObjImporter extends Importer {
             PolyObjImporter reader = new PolyObjImporter(fileUrl);
             for (String mesh : reader.getMeshes()) {
                 res.getChildren().add(reader.buildPolygonMeshView(mesh));
-            };
+            }
         } else {
             ObjImporter reader = new ObjImporter(fileUrl);
             for (String mesh : reader.getMeshes()) {
                 res.getChildren().add(reader.buildMeshView(mesh));
-            };
+            }
         }
     }
 

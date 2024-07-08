@@ -212,8 +212,7 @@ public class Point2D {
      */
     public boolean equals(Object obj) {
         if (obj == this) return true;
-        if (obj instanceof Point2D) {
-            Point2D p2d = (Point2D) obj;
+        if (obj instanceof Point2D p2d) {
             return (x == p2d.x) && (y == p2d.y);
         }
         return false;

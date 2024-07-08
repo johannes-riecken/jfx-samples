@@ -43,12 +43,12 @@ import javafx.scene.transform.Translate;
  * A Group that auto scales its self to fit its content in a given size box.
  */
 public class AutoScalingGroup extends Group {
-    private double size;
-    private double twoSize;
-    private boolean autoScale = false;
-    private Translate translate = new Translate(0,0,0);
-    private Scale scale = new Scale(1,1,1,0,0,0);
-    private SimpleBooleanProperty enabled = new SimpleBooleanProperty(false) {
+    private final double size;
+    private final double twoSize;
+    private final boolean autoScale = false;
+    private final Translate translate = new Translate(0,0,0);
+    private final Scale scale = new Scale(1,1,1,0,0,0);
+    private final SimpleBooleanProperty enabled = new SimpleBooleanProperty(false) {
         @Override protected void invalidated() {
             if (get()) {
                 getTransforms().setAll(scale, translate);
@@ -102,8 +102,7 @@ public class AutoScalingGroup extends Group {
             double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
             double maxX = Double.MIN_VALUE, maxY = Double.MIN_VALUE, maxZ = Double.MIN_VALUE;
             boolean first = true;
-            for (int i=0, max=children.size(); i<max; i++) {
-                final Node node = children.get(i);
+            for (final Node node : children) {
                 if (node.isVisible()) {
                     Bounds bounds = node.getBoundsInLocal();
                     // if the bounds of the child are invalid, we don't want

@@ -54,12 +54,8 @@ public class MBoolImpl extends MDataImpl implements MBool {
 
     public void parse(Iterator<String> values) {
         String val = values.next();
-        if (val.equals("yes") ||
-                val.equals("true")) {
-            value = true;
-        } else {
-            value = false;
-        }
+        value = val.equals("yes") ||
+                val.equals("true");
     }
 
     public String toString() {

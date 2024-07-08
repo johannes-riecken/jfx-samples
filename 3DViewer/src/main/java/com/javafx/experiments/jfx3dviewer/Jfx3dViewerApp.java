@@ -63,7 +63,7 @@ public class Jfx3dViewerApp extends Application {
         }
         contentModel = new ContentModel();
         Scene scene = new Scene(
-                FXMLLoader.<Parent>load(Jfx3dViewerApp.class.getResource("main.fxml")),
+                FXMLLoader.load(Jfx3dViewerApp.class.getResource("main.fxml")),
                 1024,600);
         stage.setScene(scene);
         stage.show();

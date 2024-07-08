@@ -40,10 +40,10 @@ import com.javafx.experiments.importers.maya.values.MFloat2;
 
 public class MFloat2Impl extends MDataImpl implements MFloat2 {
 
-    private float[] data = new float[2];
+    private final float[] data = new float[2];
 
     class MFloat2Component extends MDataImpl implements MFloat {
-        private int index;
+        private final int index;
 
         MFloat2Component(int index) {
             super(MFloat2Impl.this.getEnv().findDataType("float"));

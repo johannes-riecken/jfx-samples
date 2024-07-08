@@ -40,7 +40,7 @@ import com.javafx.experiments.utils3d.geom.Rectangle;
 public abstract class BaseTransform implements CanTransformVec3d {
     public static final BaseTransform IDENTITY_TRANSFORM = new Identity();
 
-    public static enum Degree {
+    public enum Degree {
         IDENTITY,
         TRANSLATE_2D,
         AFFINE_2D,
@@ -572,11 +572,9 @@ public abstract class BaseTransform implements CanTransformVec3d {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof BaseTransform)) {
+        if (!(obj instanceof BaseTransform a)) {
             return false;
         }
-
-        BaseTransform a = (BaseTransform) obj;
 
         return (getMxx() == a.getMxx() &&
                 getMxy() == a.getMxy() &&

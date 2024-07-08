@@ -42,7 +42,7 @@ public class MInt3ArrayImpl extends MDataImpl implements MInt3Array {
     private int[] data;
 
     static class Parser {
-        private MInt3Array array;
+        private final MInt3Array array;
 
         Parser(MInt3Array array) {
             this.array = array;
@@ -61,15 +61,15 @@ public class MInt3ArrayImpl extends MDataImpl implements MInt3Array {
     }
 
     static class MInt3ArraySlice extends MDataImpl implements MInt3Array {
-        private MInt3Array array;
-        private int base;
-        private int length;
+        private final MInt3Array array;
+        private final int base;
+        private final int length;
 
         MInt3ArraySlice(
                 MInt3Array array,
                 int base,
                 int length) {
-            super((MInt3ArrayType) array.getType());
+            super(array.getType());
             this.array = array;
             this.base = base;
             this.length = length;
@@ -115,7 +115,7 @@ public class MInt3ArrayImpl extends MDataImpl implements MInt3Array {
     }
 
     public void set(int index, int x, int y, int z) {
-        data[3 * index + 0] = x;
+        data[3 * index] = x;
         data[3 * index + 1] = y;
         data[3 * index + 2] = z;
     }
