@@ -1,4 +1,4 @@
-module com.javafx.experiments.jfx3dviewer {
+module com.javafx.experiments.importers {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -14,15 +14,18 @@ module com.javafx.experiments.jfx3dviewer {
     requires org.apache.lucene.sandbox;
     requires org.apache.lucene.grouping;
     requires jakarta.json.bind;
-    requires com.javafx.experiments.importers;
     uses com.javafx.experiments.importers.Importer;
-//    provides com.javafx.experiments.importers.Importer with com.javafx.experiments.importers.obj.ObjOrPolyObjImporter;
+    provides com.javafx.experiments.importers.Importer with com.javafx.experiments.importers.obj.ObjOrPolyObjImporter;
 
 
-//    exports com.javafx.experiments.importers.maya to javafx.fxml;
+    exports com.javafx.experiments.importers.maya to javafx.fxml;
 //    opens com.javafx.experiments.shape3d to javafx.fxml;
-    exports com.javafx.experiments.jfx3dviewer;
-    exports com.javafx.experiments.height2normal;
+    opens com.javafx.experiments.importers.max to org.eclipse.yasson, java.base;
+    opens com.javafx.experiments.shape3d to javafx.fxml;
+    exports com.javafx.experiments.importers;
 //    opens com.javafx.experiments.jfx3dviewer to java.base, org.eclipse.yasson;
-    opens com.javafx.experiments.jfx3dviewer to java.base, javafx.fxml, org.eclipse.yasson;
+    opens com.javafx.experiments.importers to java.base, javafx.fxml, org.eclipse.yasson;
+    exports com.javafx.experiments.importers.obj;
+    exports com.javafx.experiments.shape3d;
+    exports com.javafx.experiments.utils3d.animation;
 }

@@ -57,8 +57,6 @@ import com.javafx.experiments.shape3d.SubdivisionMesh;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.scene.Scene;
 import javafx.util.Duration;
 
 /**

@@ -32,6 +32,7 @@
 package com.javafx.experiments.shape3d.symbolic;
 
 import java.util.Arrays;
+
 import com.javafx.experiments.shape3d.SubdivisionMesh;
 
 public class SubdividedPointArray extends SymbolicPointArray {

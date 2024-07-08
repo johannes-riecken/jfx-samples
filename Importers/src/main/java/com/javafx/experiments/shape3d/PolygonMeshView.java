@@ -44,8 +44,6 @@ import javafx.scene.shape.CullFace;
 import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
-import static javafx.scene.shape.TriangleMesh.*;
-import static com.javafx.experiments.shape3d.SubdivisionMesh.*;
 
 /**
  * A MeshView node for Polygon Meshes
@@ -194,12 +192,12 @@ public class PolygonMeshView extends Parent {
      *
      * @defaultValue BoundaryMode.CREASE_EDGES
      */
-    private SimpleObjectProperty<BoundaryMode> boundaryMode;
-    public void setBoundaryMode(BoundaryMode boundaryMode) { boundaryModeProperty().set(boundaryMode); }
-    public BoundaryMode getBoundaryMode() { return boundaryMode == null ? BoundaryMode.CREASE_EDGES : boundaryMode.get(); }
-    public SimpleObjectProperty<BoundaryMode> boundaryModeProperty() {
+    private SimpleObjectProperty<SubdivisionMesh.BoundaryMode> boundaryMode;
+    public void setBoundaryMode(SubdivisionMesh.BoundaryMode boundaryMode) { boundaryModeProperty().set(boundaryMode); }
+    public SubdivisionMesh.BoundaryMode getBoundaryMode() { return boundaryMode == null ? SubdivisionMesh.BoundaryMode.CREASE_EDGES : boundaryMode.get(); }
+    public SimpleObjectProperty<SubdivisionMesh.BoundaryMode> boundaryModeProperty() {
         if (boundaryMode == null) {
-            boundaryMode = new SimpleObjectProperty<BoundaryMode>(getBoundaryMode()) {
+            boundaryMode = new SimpleObjectProperty<SubdivisionMesh.BoundaryMode>(getBoundaryMode()) {
                 @Override protected void invalidated() {
                     if (subdivisionMesh != null) {
                         subdivisionMesh.setBoundaryMode(getBoundaryMode());
@@ -218,12 +216,12 @@ public class PolygonMeshView extends Parent {
      *
      * @defaultValue MapBorderMode.NOT_SMOOTH
      */
-    private SimpleObjectProperty<MapBorderMode> mapBorderMode;
-    public void setMapBorderMode(MapBorderMode mapBorderMode) { mapBorderModeProperty().set(mapBorderMode); }
-    public MapBorderMode getMapBorderMode() { return mapBorderMode == null ? MapBorderMode.NOT_SMOOTH : mapBorderMode.get(); }
-    public SimpleObjectProperty<MapBorderMode> mapBorderModeProperty() {
+    private SimpleObjectProperty<SubdivisionMesh.MapBorderMode> mapBorderMode;
+    public void setMapBorderMode(SubdivisionMesh.MapBorderMode mapBorderMode) { mapBorderModeProperty().set(mapBorderMode); }
+    public SubdivisionMesh.MapBorderMode getMapBorderMode() { return mapBorderMode == null ? SubdivisionMesh.MapBorderMode.NOT_SMOOTH : mapBorderMode.get(); }
+    public SimpleObjectProperty<SubdivisionMesh.MapBorderMode> mapBorderModeProperty() {
         if (mapBorderMode == null) {
-            mapBorderMode = new SimpleObjectProperty<MapBorderMode>(getMapBorderMode()) {
+            mapBorderMode = new SimpleObjectProperty<SubdivisionMesh.MapBorderMode>(getMapBorderMode()) {
                 @Override protected void invalidated() {
                     if (subdivisionMesh != null) {
                         subdivisionMesh.setMapBorderMode(getMapBorderMode());

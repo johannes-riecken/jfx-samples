@@ -37,9 +37,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import javafx.geometry.Point2D;
 
-import static com.javafx.experiments.shape3d.SubdivisionMesh.*;
+import com.javafx.experiments.shape3d.SubdivisionMesh;
+import javafx.geometry.Point2D;
 
 /**
  *
@@ -55,10 +55,10 @@ public class SymbolicSubdivisionBuilder {
     private float[] texCoords;
     private int[] reindex;
     private int newTexCoordIndex;
-    private BoundaryMode boundaryMode;
-    private MapBorderMode mapBorderMode;
+    private SubdivisionMesh.BoundaryMode boundaryMode;
+    private SubdivisionMesh.MapBorderMode mapBorderMode;
 
-    public SymbolicSubdivisionBuilder(SymbolicPolygonMesh oldMesh, BoundaryMode boundaryMode, MapBorderMode mapBorderMode) {
+    public SymbolicSubdivisionBuilder(SymbolicPolygonMesh oldMesh, SubdivisionMesh.BoundaryMode boundaryMode, SubdivisionMesh.MapBorderMode mapBorderMode) {
         this.oldMesh = oldMesh;
         this.boundaryMode = boundaryMode;
         this.mapBorderMode = mapBorderMode;
@@ -114,7 +114,7 @@ public class SymbolicSubdivisionBuilder {
         return newMesh;
     }
 
-    public static SymbolicPolygonMesh subdivide(SymbolicPolygonMesh oldMesh, BoundaryMode boundaryMode, MapBorderMode mapBorderMode) {
+    public static SymbolicPolygonMesh subdivide(SymbolicPolygonMesh oldMesh, SubdivisionMesh.BoundaryMode boundaryMode, SubdivisionMesh.MapBorderMode mapBorderMode) {
         SymbolicSubdivisionBuilder subdivision = new SymbolicSubdivisionBuilder(oldMesh, boundaryMode, mapBorderMode);
         return subdivision.subdivide();
     }
@@ -237,8 +237,8 @@ public class SymbolicSubdivisionBuilder {
     private void calcControlTexCoord(FaceInfo faceInfo, int srcPointIndex, int srcTexCoordIndex, int destTexCoordIndex){
         PointInfo pointInfo = pointInfos[srcPointIndex];
         boolean pointBelongsToCrease = oldMesh.points instanceof OriginalPointArray;
-        if ((mapBorderMode == MapBorderMode.SMOOTH_ALL && (pointInfo.isBoundary() || pointBelongsToCrease)) ||
-                (mapBorderMode == MapBorderMode.SMOOTH_INTERNAL && !pointInfo.hasInternalEdge())) {
+        if ((mapBorderMode == SubdivisionMesh.MapBorderMode.SMOOTH_ALL && (pointInfo.isBoundary() || pointBelongsToCrease)) ||
+                (mapBorderMode == SubdivisionMesh.MapBorderMode.SMOOTH_INTERNAL && !pointInfo.hasInternalEdge())) {
             double u = oldMesh.texCoords[srcTexCoordIndex * 2] / 2;
             double v = oldMesh.texCoords[srcTexCoordIndex * 2 + 1] / 2;
             for (int i = 0; i < faceInfo.edges.length; i++) {
