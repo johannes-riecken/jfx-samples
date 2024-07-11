@@ -8,6 +8,6 @@ module com.javafx.experiments.importers.max {
     requires com.javafx.experiments.importers;
     requires java.logging;
 
-    opens com.javafx.experiments.loaders.max to org.eclipse.yasson, java.base;
+    opens com.javafx.experiments.loaders.max to java.base;
 
 }

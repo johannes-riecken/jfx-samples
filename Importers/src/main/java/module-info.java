@@ -15,7 +15,6 @@ module com.javafx.experiments.importers {
     requires org.apache.lucene.grouping;
     requires jakarta.json.bind;
     uses com.javafx.experiments.importers.Importer;
-    provides com.javafx.experiments.importers.Importer with com.javafx.experiments.importers.obj.ObjOrPolyObjImporter;
 
 
     exports com.javafx.experiments.importers.maya to javafx.fxml, com.javafx.experiments.importers.max;
@@ -24,7 +23,6 @@ module com.javafx.experiments.importers {
     exports com.javafx.experiments.importers;
 //    opens com.javafx.experiments.jfx3dviewer to java.base, org.eclipse.yasson;
     opens com.javafx.experiments.importers to java.base, javafx.fxml, org.eclipse.yasson;
-    exports com.javafx.experiments.importers.obj;
     exports com.javafx.experiments.shape3d;
     exports com.javafx.experiments.utils3d.animation;
     exports com.javafx.experiments.importers.max;
