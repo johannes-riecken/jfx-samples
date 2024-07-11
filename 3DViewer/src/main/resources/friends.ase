@@ -1,0 +1,12 @@
+*PERSON {
+    *ID "foo"
+    *FRIENDS {
+        *FRIEND_COUNT 2
+        *FRIEND 0 {
+            *ID "bar"
+        }
+        *FRIEND 1 {
+            *ID "baz"
+        }
+    }
+}

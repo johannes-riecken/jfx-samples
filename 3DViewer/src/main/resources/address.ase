@@ -1,0 +1,7 @@
+*PERSON {
+    *ID "foo"
+    *ADDRESS {
+        *STREET "123 Main St."
+        *CITY "New York"
+    }
+}

@@ -1,0 +1,4 @@
+*PERSON {
+    *ID "foo"
+    *FAVORITE_COLOR 0.5 0.25 0.125
+}
