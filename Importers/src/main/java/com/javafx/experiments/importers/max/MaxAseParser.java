@@ -35,37 +35,28 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import com.javafx.experiments.importers.max.MaxAseTokenizer.Callback;
-import com.javafx.experiments.importers.max.MaxData.CameraNode;
-import com.javafx.experiments.importers.max.MaxData.GeomNode;
-import com.javafx.experiments.importers.max.MaxData.LightNode;
-import com.javafx.experiments.importers.max.MaxData.MappingChannel;
-import com.javafx.experiments.importers.max.MaxData.Material;
-import com.javafx.experiments.importers.max.MaxData.Mesh;
-import com.javafx.experiments.importers.max.MaxData.Node;
-import com.javafx.experiments.importers.max.MaxData.NodeTM;
 
 /** Max .ase file parser */
 public class MaxAseParser {
 
     public MaxData data = new MaxData();
 
-    private Node addNode(Node n, String name) {
+    private MaxData.Node addNode(MaxData.Node n, String name) {
         n.name = name;
         data.roots.put(name, n);
         data.nodes.put(name, n);
         return n;
     }
 
-    private static void attachChild(Node parent, Node n) {
+    private static void attachChild(MaxData.Node parent, MaxData.Node n) {
         if (parent.children == null)
             parent.children = new ArrayList<>();
         n.parent = parent;
         parent.children.add(n);
     }
 
-    private void attachNode(Node n, String parentName) {
-        Node parent = data.nodes.get(parentName);
+    private void attachNode(MaxData.Node n, String parentName) {
+        MaxData.Node parent = data.nodes.get(parentName);
         if (parent != null) {
             attachChild(parent, n);
             data.roots.remove(n.name);
@@ -87,9 +78,9 @@ public class MaxAseParser {
     }
 
     private class FileParserCallback extends MaxAseTokenizer.Callback {
-        void onValue(String name, Callback.ParamList list) {}
+        void onValue(String name, ParamList list) {}
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*SCENE":
                     return this;
@@ -109,15 +100,15 @@ public class MaxAseParser {
         }
     }
 
-    private class MaterialListParser extends Callback {
+    private class MaterialListParser extends MaxAseTokenizer.Callback {
         final int MAP_ID_DIFFUSE = 0;
-        Material current;
+        MaxData.Material current;
         int currentMapId;
 
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*MATERIAL_COUNT":
-                    data.materials = new Material[list.nextInt()];
+                    data.materials = new MaxData.Material[list.nextInt()];
                     break;
 
                 case "*MATERIAL_NAME":
@@ -142,10 +133,10 @@ public class MaxAseParser {
             }
         }
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*MATERIAL":
-                    current = new Material();
+                    current = new MaxData.Material();
                     data.materials[list.nextInt()] = current;
                     break;
 
@@ -157,14 +148,14 @@ public class MaxAseParser {
         }
     }
 
-    private static class NodeTMParser extends Callback {
-        NodeTM nodeTm;
+    private static class NodeTMParser extends MaxAseTokenizer.Callback {
+        MaxData.NodeTM nodeTm;
 
-        public NodeTMParser(NodeTM newNodeTm) {
+        public NodeTMParser(MaxData.NodeTM newNodeTm) {
             nodeTm = newNodeTm;
         }
 
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*NODE_NAME":
                     nodeTm.name = list.nextString(); break;
@@ -181,7 +172,7 @@ public class MaxAseParser {
     }
 
     private abstract class NodeParserBase extends MaxAseTokenizer.Callback {
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*NODE_NAME":
                     addNode(createNode(), list.nextString()); break;
@@ -190,28 +181,28 @@ public class MaxAseParser {
             }
         }
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*NODE_TM": return new NodeTMParser(addNodeTm());
             }
             return MaxAseTokenizer.CallbackNOP.instance;
         }
 
-        abstract Node createNode();
+        abstract MaxData.Node createNode();
 
-        abstract Node getNode();
+        abstract MaxData.Node getNode();
 
-        NodeTM addNodeTm() { return getNode().nodeTM = new NodeTM(); }
+        MaxData.NodeTM addNodeTm() { return getNode().nodeTM = new MaxData.NodeTM(); }
     }
 
     private class LightNodeParser extends NodeParserBase {
-        LightNode n;
+        MaxData.LightNode n;
 
-        Node createNode() { return n = new LightNode(); }
+        MaxData.Node createNode() { return n = new MaxData.LightNode(); }
 
-        Node getNode() { return n; }
+        MaxData.Node getNode() { return n; }
 
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*LIGHT_INTENS":
                     n.intensity = list.nextFloat(); break;
@@ -224,7 +215,7 @@ public class MaxAseParser {
             }
         }
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*LIGHT_SETTINGS": return this;
                 default: return super.onObject(name, list);
@@ -234,20 +225,20 @@ public class MaxAseParser {
     }
 
     private class CameraNodeParser extends NodeParserBase {
-        CameraNode node;
+        MaxData.CameraNode node;
 
-        Node createNode() { return node = new CameraNode(); }
+        MaxData.Node createNode() { return node = new MaxData.CameraNode(); }
 
-        Node getNode() { return node; }
+        MaxData.Node getNode() { return node; }
 
-        NodeTM addNodeTm() {
-            NodeTM ntm = new NodeTM();
+        MaxData.NodeTM addNodeTm() {
+            MaxData.NodeTM ntm = new MaxData.NodeTM();
             if (node.nodeTM == null) return node.nodeTM = ntm;
             if (node.target == null) return node.target = ntm;
             return ntm;
         }
 
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*CAMERA_NEAR":
                     node.near = list.nextFloat(); break;
@@ -260,7 +251,7 @@ public class MaxAseParser {
             }
         }
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*CAMERA_SETTINGS": return this;
                 default: return super.onObject(name, list);
@@ -269,20 +260,20 @@ public class MaxAseParser {
     }
 
     private class NodeParser extends NodeParserBase {
-        Node n;
+        MaxData.Node n;
 
-        Node createNode() { return n = new Node(); }
+        MaxData.Node createNode() { return n = new MaxData.Node(); }
 
-        Node getNode() { return n; }
+        MaxData.Node getNode() { return n; }
     }
 
-    private static class MeshParser extends Callback {
-        Mesh mesh;
-        MappingChannel mapping;
+    private static class MeshParser extends MaxAseTokenizer.Callback {
+        MaxData.Mesh mesh;
+        MaxData.MappingChannel mapping;
 
-        private MeshParser(Mesh mesh) { this.mesh = mesh; }
+        private MeshParser(MaxData.Mesh mesh) { this.mesh = mesh; }
 
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*MESH_NUMVERTEX":
                     mesh.nPoints = list.nextInt();
@@ -308,7 +299,7 @@ public class MaxAseParser {
             }
         }
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*MESH_VERTEX_LIST": return new MeshVertexList(mesh.points);
                 case "*MESH_FACE_LIST": return new MeshFaceList(mesh.faces);
@@ -319,22 +310,22 @@ public class MaxAseParser {
             }
         }
 
-        MappingChannel getMapping(int ch) {
+        MaxData.MappingChannel getMapping(int ch) {
             if (mesh.mapping == null) {
-                mesh.mapping = new MappingChannel[ch + 1];
+                mesh.mapping = new MaxData.MappingChannel[ch + 1];
             } else if (mesh.mapping.length <= ch) {
-                MappingChannel[] m = new MappingChannel[ch + 1];
+                MaxData.MappingChannel[] m = new MaxData.MappingChannel[ch + 1];
                 System.arraycopy(mesh.mapping, 0, m, 0, mesh.mapping.length);
                 mesh.mapping = m;
             }
 
             if (mesh.mapping[ch] == null) {
-                mesh.mapping[ch] = new MappingChannel();
+                mesh.mapping[ch] = new MaxData.MappingChannel();
             }
             return mesh.mapping[ch];
         }
 
-        private static class MeshVertexList extends Callback {
+        private static class MeshVertexList extends MaxAseTokenizer.Callback {
             final float[] data;
 
             MeshVertexList(float[] data) { this.data = data; }
@@ -347,7 +338,7 @@ public class MaxAseParser {
             }
         }
 
-        private static class MeshTVertexList extends Callback {
+        private static class MeshTVertexList extends MaxAseTokenizer.Callback {
             final float[] data;
 
             MeshTVertexList(float[] data) { this.data = data; }
@@ -359,7 +350,7 @@ public class MaxAseParser {
             }
         }
 
-        private static class MeshTFaceList extends Callback {
+        private static class MeshTFaceList extends MaxAseTokenizer.Callback {
             final int[] data;
 
             MeshTFaceList(int[] data) { this.data = data; }
@@ -373,7 +364,7 @@ public class MaxAseParser {
         }
 
         // *MESH_FACE 3045:    A: 2186 B: 2029 C: 1512 AB:    1 BC:    1 CA:    0  *MESH_SMOOTHING 1,25  *MESH_MTLID 1
-        private static class MeshFaceList extends Callback {
+        private static class MeshFaceList extends MaxAseTokenizer.Callback {
             final int[] data; // a,b,c, smoothing
 
             MeshFaceList(int[] data) { this.data = data; }
@@ -403,13 +394,13 @@ public class MaxAseParser {
     }
 
     private class GeomNodeParser extends NodeParserBase {
-        GeomNode n;
+        MaxData.GeomNode n;
 
-        Node createNode() { return n = new GeomNode(); }
+        MaxData.Node createNode() { return n = new MaxData.GeomNode(); }
 
-        Node getNode() { return n; }
+        MaxData.Node getNode() { return n; }
 
-        void onValue(String name, Callback.ParamList list) {
+        void onValue(String name, ParamList list) {
             switch (name) {
                 case "*MATERIAL_REF":
                     n.materialRef = list.nextInt(); break;
@@ -417,10 +408,10 @@ public class MaxAseParser {
             }
         }
 
-        Callback onObject(String name, Callback.ParamList list) {
+        MaxAseTokenizer.Callback onObject(String name, ParamList list) {
             switch (name) {
                 case "*MESH":
-                    return new MeshParser(n.mesh = new Mesh());
+                    return new MeshParser(n.mesh = new MaxData.Mesh());
                 default: return super.onObject(name, list);
             }
         }

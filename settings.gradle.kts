@@ -6,3 +6,4 @@ rootProject.name = "samples"
 
 include("3DViewer")
 include("Importers")
+include("Loaders")

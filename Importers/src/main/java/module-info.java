@@ -20,7 +20,6 @@ module com.javafx.experiments.importers {
 
     exports com.javafx.experiments.importers.maya to javafx.fxml;
 //    opens com.javafx.experiments.shape3d to javafx.fxml;
-    opens com.javafx.experiments.importers.max to org.eclipse.yasson, java.base;
     opens com.javafx.experiments.shape3d to javafx.fxml;
     exports com.javafx.experiments.importers;
 //    opens com.javafx.experiments.jfx3dviewer to java.base, org.eclipse.yasson;
@@ -28,4 +27,6 @@ module com.javafx.experiments.importers {
     exports com.javafx.experiments.importers.obj;
     exports com.javafx.experiments.shape3d;
     exports com.javafx.experiments.utils3d.animation;
+    exports com.javafx.experiments.importers.max;
+    opens com.javafx.experiments.importers.max to java.base, org.eclipse.yasson;
 }

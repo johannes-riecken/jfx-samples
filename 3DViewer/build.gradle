@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.org.openjfx.javafx.web)
     implementation(libs.org.apache.lucene.lucene.queryparser)
     implementation(libs.org.apache.lucene.lucene.grouping)
+    implementation(project(":Loaders"))
     implementation(project(":Importers"))
 //    testImplementation(libs.org.junit.jupiter.junit.jupiter)
 //    testImplementation(libs.junit.junit)

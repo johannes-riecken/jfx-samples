@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/3DViewer" />
             <option value="$PROJECT_DIR$/Importers" />
+            <option value="$PROJECT_DIR$/Loaders" />
           </set>
         </option>
       </GradleProjectSettings>

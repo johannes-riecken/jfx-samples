@@ -29,7 +29,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.javafx.experiments.importers.max;
+package com.javafx.experiments.loaders.max;
 
 import com.javafx.experiments.importers.Importer;
 import java.io.File;
@@ -37,6 +37,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+
+import com.javafx.experiments.importers.max.MaxAseParser;
+import com.javafx.experiments.importers.max.MaxData;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.Node;
