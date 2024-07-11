@@ -1,4 +1,4 @@
-module com.javafx.experiments.importers {
+module Importers {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -17,7 +17,7 @@ module com.javafx.experiments.importers {
     uses com.javafx.experiments.importers.Importer;
 
 
-    exports com.javafx.experiments.importers.maya to javafx.fxml, com.javafx.experiments.importers.max;
+    exports com.javafx.experiments.importers.maya to javafx.fxml, Loaders;
 //    opens com.javafx.experiments.shape3d to javafx.fxml;
     opens com.javafx.experiments.shape3d to javafx.fxml;
     exports com.javafx.experiments.importers;

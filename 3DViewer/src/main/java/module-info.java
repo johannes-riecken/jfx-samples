@@ -1,4 +1,4 @@
-module com.javafx.experiments.jfx3dviewer {
+module Jfx3dViewer {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -14,7 +14,7 @@ module com.javafx.experiments.jfx3dviewer {
     requires org.apache.lucene.sandbox;
     requires org.apache.lucene.grouping;
     requires jakarta.json.bind;
-    requires com.javafx.experiments.importers;
+    requires Importers;
     uses com.javafx.experiments.importers.Importer;
 //    provides com.javafx.experiments.importers.Importer with com.javafx.experiments.importers.obj.ObjOrPolyObjImporter;
 

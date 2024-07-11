@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainModule = 'com.javafx.experiments.jfx3dviewer'
+    mainModule = 'Jfx3dViewer'
     mainClass = 'com.javafx.experiments.jfx3dviewer.Jfx3dViewerApp'
 }
 
