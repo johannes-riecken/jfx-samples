@@ -29,7 +29,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.javafx.experiments.importers.maya;
+package com.javafx.experiments.loaders.maya;
 
 import com.javafx.experiments.importers.SmoothingGroups;
 
@@ -46,6 +46,7 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.javafx.experiments.importers.maya.*;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -1295,11 +1296,7 @@ class Loader {
     // Loader.addKeyframe
     //=========================================================================
     void addKeyframe(float t, KeyValue keyValue) {
-        List<KeyValue> vals = keyFrameMap.get(t);
-        if (vals == null) {
-            vals = new LinkedList<KeyValue>();
-            keyFrameMap.put(t, vals);
-        }
+        List<KeyValue> vals = keyFrameMap.computeIfAbsent(t, k -> new LinkedList<KeyValue>());
         vals.add(keyValue);
     }
 

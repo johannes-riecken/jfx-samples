@@ -116,7 +116,7 @@ public final class Importer3D {
             String [] names = {
                  "com.javafx.experiments.importers.dae.DaeImporter",
                  "com.javafx.experiments.importers.max.MaxLoader",
-                 "com.javafx.experiments.importers.maya.MayaImporter",
+                 "com.javafx.experiments.loaders.maya.MayaImporter",
                  "com.javafx.experiments.importers.obj.ObjOrPolyObjImporter",
             };
             boolean fail = true;

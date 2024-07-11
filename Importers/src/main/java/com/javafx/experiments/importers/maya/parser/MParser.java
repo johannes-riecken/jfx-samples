@@ -46,7 +46,6 @@ import java.util.StringTokenizer;
 import com.javafx.experiments.importers.maya.MEnv;
 import com.javafx.experiments.importers.maya.MNode;
 import com.javafx.experiments.importers.maya.MPath;
-import com.javafx.experiments.importers.maya.MayaImporter;
 import com.javafx.experiments.importers.maya.values.MData;
 import com.javafx.experiments.importers.maya.values.MPointer;
 
@@ -553,10 +552,7 @@ public class MParser {
         // System.err.println("TELLING " + target.substring(1) + " TO PARSE VALUE " + value);
         try {
             data.parse(value);
-        } catch (Exception e) {
-            if (MayaImporter.DEBUG) {
-                e.printStackTrace(System.err);
-            }
+        } catch (Exception _) {
         }
     }
 }

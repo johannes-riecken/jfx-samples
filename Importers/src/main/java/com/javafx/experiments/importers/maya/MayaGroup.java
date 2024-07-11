@@ -50,20 +50,20 @@ import javafx.scene.transform.Translate;
  * to identity, so matrix = [T][RP][R][RP-1][SP][S][SP-1] matrix = [T][RP][RZ][RY][RX][RP-1][SP][S][SP-1]
  */
 public class MayaGroup extends Group {
-    Translate t = new Translate();
-    Translate rpt = new Translate();  // rotate pivot translate
-    Translate rp = new Translate();  // rotate pivot
-    Translate rpi = new Translate();  // rotate pivot inverse
-    Translate spt = new Translate();  // scale pivot translate
-    Translate sp = new Translate();  // scale pivot
-    Translate spi = new Translate();  // scale pivot inverse
+    public Translate t = new Translate();
+    public Translate rpt = new Translate();  // rotate pivot translate
+    public Translate rp = new Translate();  // rotate pivot
+    public Translate rpi = new Translate();  // rotate pivot inverse
+    public Translate spt = new Translate();  // scale pivot translate
+    public Translate sp = new Translate();  // scale pivot
+    public Translate spi = new Translate();  // scale pivot inverse
     // should bind rpi = -rp, but doesn't currently work afaict
 
-    Rotate rx = new Rotate(0, Rotate.X_AXIS);
-    Rotate ry = new Rotate(0, Rotate.Y_AXIS);
-    Rotate rz = new Rotate(0, Rotate.Z_AXIS);
+    public Rotate rx = new Rotate(0, Rotate.X_AXIS);
+    public Rotate ry = new Rotate(0, Rotate.Y_AXIS);
+    public Rotate rz = new Rotate(0, Rotate.Z_AXIS);
 
-    Scale s = new Scale();
+    public Scale s = new Scale();
 
     public MayaGroup() {
         initTransforms();

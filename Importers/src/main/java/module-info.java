@@ -18,7 +18,7 @@ module com.javafx.experiments.importers {
     provides com.javafx.experiments.importers.Importer with com.javafx.experiments.importers.obj.ObjOrPolyObjImporter;
 
 
-    exports com.javafx.experiments.importers.maya to javafx.fxml;
+    exports com.javafx.experiments.importers.maya to javafx.fxml, com.javafx.experiments.importers.max;
 //    opens com.javafx.experiments.shape3d to javafx.fxml;
     opens com.javafx.experiments.shape3d to javafx.fxml;
     exports com.javafx.experiments.importers;
@@ -29,4 +29,7 @@ module com.javafx.experiments.importers {
     exports com.javafx.experiments.utils3d.animation;
     exports com.javafx.experiments.importers.max;
     opens com.javafx.experiments.importers.max to java.base, org.eclipse.yasson;
+    exports com.javafx.experiments.importers.maya.values;
+    exports com.javafx.experiments.importers.maya.parser;
+    exports com.javafx.experiments.utils3d.geom;
 }

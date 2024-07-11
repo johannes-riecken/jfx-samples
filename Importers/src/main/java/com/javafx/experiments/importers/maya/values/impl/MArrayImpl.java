@@ -35,14 +35,11 @@ package com.javafx.experiments.importers.maya.values.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import com.javafx.experiments.importers.maya.MayaImporter;
 import com.javafx.experiments.importers.maya.types.MArrayType;
 import com.javafx.experiments.importers.maya.values.MArray;
 import com.javafx.experiments.importers.maya.values.MData;
 
 public class MArrayImpl extends MDataImpl implements MArray {
-    public static final boolean DEBUG = MayaImporter.DEBUG;
-    public static final boolean WARN = MayaImporter.WARN;
 
     List<MData> data = new ArrayList();
 
@@ -128,7 +125,6 @@ public class MArrayImpl extends MDataImpl implements MArray {
         if (index >= data.size()) {  // TODO huge hack, to prevent out of bounds exception
             int oldIndex = index;
             index = data.size() - 1;
-            if (WARN) System.err.println("Changed index from [" + oldIndex + "] to [" + index + "]");
         }
         return data.get(index);
     }

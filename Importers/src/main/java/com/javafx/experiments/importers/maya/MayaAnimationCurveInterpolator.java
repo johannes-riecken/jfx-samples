@@ -38,7 +38,7 @@ import javafx.animation.Interpolator;
  * <p/>
  * Interpolator is from javafx.animation
  */
-class MayaAnimationCurveInterpolator extends Interpolator {
+public class MayaAnimationCurveInterpolator extends Interpolator {
 
     float p1Delta;
     float p2Delta;
