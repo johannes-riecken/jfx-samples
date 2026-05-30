@@ -23,4 +23,9 @@ dependencies {
     testImplementation(libs.junit.junit)
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_18
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(26))
+    }
+}
+
