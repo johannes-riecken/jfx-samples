@@ -57,7 +57,13 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
+    - name: Setup Java JDK
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      uses: actions/setup-java@v4
+      with:
+        java-version: 26
+        distribution: temurin
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
